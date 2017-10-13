@@ -9,7 +9,7 @@ Please feel free to connect on [LinkedIn](https://www.linkedin.com/in/duygu-alti
 
 ### Posts
 
-* Oct 13, 2017  [The Curious Case of Turkish Articulatory Phonetics](https://cdn.rawgit.com/DuyguA/DuyguA.github.io/master/TurkPhone.html)
+* Oct 13, 2017  [The Curious Case of Turkish Articulatory Phonetics](https://cdn.rawgit.com/DuyguA/DuyguA.github.io/master/Curious Case of Turkish Phonetics.ipynb)
 
 ```markdown
 Syntax highlighted code block
