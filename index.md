@@ -9,6 +9,6 @@ Please feel free to connect on [LinkedIn](https://www.linkedin.com/in/duygu-alti
 
 ### Posts
 
-* Oct 13, 2017  [The Curious Case of Turkish Articulatory Phonetics](https://cdn.rawgit.com/DuyguA/DuyguA.github.io/master/TurkishPhone.html)
+* Oct 13, 2017  [The Curious Case of Turkish Articulatory Phonetics](https://cdn.rawgit.com/DuyguA/DuyguA.github.io/master/TPhone.html)
 
 
