@@ -33,7 +33,7 @@ In general, NP in German consists of the following word order:
 ```
 Article, Number, Adjective(s), Noun, Genitive attribute, Position(s), Relative Cluase, Reflexive Pronoun
 ```
-significantly longer than the English counterpart. However, usual noun phrases are not this long of course, usually of the form Article + 1 Adjective + Noun (so don't be scared and run away:)). Reason that genitive attribute use is declining might be of this reason as well, not to make long noun phrases; longer it gets more difficult to understand.
+significantly longer than the English counterpart. However, usual noun phrases are not this long of course, usually of the form Article + Adjective? + Noun (so don't be scared and run away:)). Reason that genitive attribute use is declining might be of this reason as well, not to make long noun phrases; longer it gets more difficult to understand.
 Genitive in NP, i.e. nominal genitive marks possession:
 ```
 Der Beruf des alten Mannes     the profession of the old man
@@ -72,5 +72,27 @@ während unserer Abwesenheit    during our absence
 
 In my opinoin, #2 murderer is incorrectly used datives after these prepositions. For instance, evein in written language I see a lot `wegen dem` instead of the correct use `wegen des`. Unlike replacement with Dative, this usage is wrong.
 
+## Personal, Relative, Interrogative and Demonstrative Pronouns
 
+`Wessen` literally means **whose**. Here are some demonstrative pronouns:
+```
+desjenigen
+desselben
+```
+relative pronouns:
+```
+derer
+deren
+dessen
+```
+and personal pronouns:
+```
+meines
+deines
+seines
+ihres
+unseres
+eures
+ihres
+```
 
