@@ -1,4 +1,4 @@
-## Der Dativ ist dem Genitiv sein Tod: Story of a Bloody Murder in SpaCy and Scipy
+## Dativ ist dem Genitiv sein Tod: Story of a Bloody Murder in SpaCy and Scipy
 
 German genitive case is roughly the case that marks possession and is expressed by the apostrophe ('s) and possessive "of" in English. See an quick example:
 ```
