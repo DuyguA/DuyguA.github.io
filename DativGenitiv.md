@@ -49,19 +49,19 @@ der Hund meines Bruders  ->  der Hund von meinem Bruder
 
 In formal standart German, the object of an accusative preposition takes the genitive case. Some of common genitive prepositions are
 ```
-jenseits 	   on the other side of
-anlässlich 	 on the occasion of
-kraft 	     by virtue of
-anstelle 	   in place of
-laut 	       according to
-aufgrund     on the basis of
-seitens 	   on the part of
-außerhalb 	 outside of
-trotz 	     despite, in spite of
-bezüglich 	 with regard to
-während 	   during
-innerhalb 	 within
-wegen 	     because of
+jenseits      on the other side of
+anlässlich    on the occasion of
+kraft         by virtue of
+anstelle      in place of
+laut          according to
+aufgrund      on the basis of
+seitens       on the part of
+außerhalb     outside of
+trotz         despite, in spite of
+bezüglich     with regard to
+während       during
+innerhalb     within
+wegen         because of
 ```
 with some examples:
 ```
@@ -70,5 +70,7 @@ statt des Hemdes               instead of the shirt
 während unserer Abwesenheit    during our absence
 ```
 
-In my opinoin, #2 murderer is incorrectly used datives after these prepositions. For instance, evein in written language I see a lot `wegen dem` instead of the correct use `wegen des`. 
+In my opinoin, #2 murderer is incorrectly used datives after these prepositions. For instance, evein in written language I see a lot `wegen dem` instead of the correct use `wegen des`. Unlike replacement with Dative, this usage is wrong.
+
+
 
