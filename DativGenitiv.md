@@ -1,4 +1,4 @@
-## Der Dativ ist dem Genitiv sein Tod: Story of a Bloody Murder in SpaCy and Tensorflow
+## Der Dativ ist dem Genitiv sein Tod: Story of a Bloody Murder in SpaCy and Scipy
 
 German genitive case is roughly the case that marks possession and is expressed by the apostrophe ('s) and possessive "of" in English. See an quick example:
 ```
@@ -33,7 +33,7 @@ In general, NP in German consists of the following word order:
 ```
 Article, Number, Adjective(s), Noun, Genitive attribute, Position(s), Relative Cluase, Reflexive Pronoun
 ```
-significantly longer than the English counterpart. However, usual noun phrases are not this long of course, usually of the form Article + Adjective? + Noun (so don't be scared and run away:)). Reason that genitive attribute use is declining might be of this reason as well, not to make long noun phrases; longer it gets more difficult to understand.
+significantly longer than the English counterpart. However, usual noun phrases are not this long of course, usually of the form Article + Adjective? + Noun (so don't be scared and run away :blush:). Reason that genitive attribute use is declining might be due to this reason as well, not to make long noun phrases; longer it gets more difficult to understand.
 Genitive in NP, i.e. nominal genitive marks possession:
 ```
 Der Beruf des alten Mannes     the profession of the old man
@@ -96,3 +96,8 @@ eures
 ihres
 ```
 
+There is also adverbial genitive and some verbs that are used with genitive but quite limited use. Hence in our emprical study we'll count easily distinguishable cases (we'll be über-tricky :wink:).
+
+## The Dataset
+
+We'll dig the Yelp restaurant reviews dataset, reviews from Germany has reviews in German generally. Reviews are written in informal language, hence ideal for our emprical study :wink:
