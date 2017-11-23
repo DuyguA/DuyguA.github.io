@@ -72,7 +72,7 @@ während unserer Abwesenheit    during our absence
 
 In my opinoin, #2 murderer is incorrectly used datives after these prepositions. For instance, evein in written language I see a lot `wegen dem` instead of the correct use `wegen des`. Unlike replacement with Dative, this usage is wrong.
 
-## Personal, Relative, Interrogative and Demonstrative Pronouns
+### Personal, Relative, Interrogative and Demonstrative Pronouns
 
 `Wessen` literally means **whose**. Here are some demonstrative pronouns:
 ```
@@ -190,3 +190,10 @@ Here is the result:
 Counter({u'die': 69698, u'der': 55810, u'das': 38734, u'den': 22346, u'dem': 12347, u'des': 6435})
 ```
 It doesn't look that bad indeed. **Des** is half as **Dem**, which is not that bad. There are **205370** definite articles in  **32564**  reviews i.e. 6 article per review and **%3** of all articles is **Des**. Ok, it looks that bad now. **%3** is higher than I expected, but still looks very close to graveyard as well.
+In the second task, we'll do a more detailed count. We'll count all possessive noun phrases and see percentage of genitive. We count
+```bash
+ART NN ART ADJA? NN         der Beruf des (alten) Mannes        
+ART NN PPOSAT NN            der Hund meines Bruders
+ART NN APPR PPOSAT NN       der Hund von meinem Bruder
+```
+sequences and filter by some small tricks to distinguish genitive ones :wink: .
