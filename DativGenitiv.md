@@ -138,8 +138,8 @@ $ wc -l ids.txt
 In order to select German restaurant reviews from `review.json`, I play a bit with `jq` instead of benefitting from chunk reading talents of **Pandas**. Obviously such a huge json can't be read into memeory once, one has to iterate in chunks. However, as a text miner I play with **jq** a lot, here I decided to filter first German reviews then read them into Python. Surely **Pandas** provide nice methods for chunk iterating, but remember there's always more than one way to swim a fish :wink:
 Following lines will select lines from `review.json` where **business_id** is in `ids.txt`:
 ```bash
-jq -R . ids.txt > ids.json
-jq --slurpfile ids ids.json 'map(select(.business_id as $id|any($ids[];$id==.)))' review.json > german_reviews.json
+$ jq -R . ids.txt > ids.json
+$ jq --slurpfile ids ids.json 'map(select(.business_id as $id|any($ids[];$id==.)))' review.json > german_reviews.json
 ```
 Note that there are also English reviews for German restaurants, mainly by expats. We'll make a small trick and filter mixed reviews by existence of the words **ich, Sie, und, aber, oder, bin, habe, kann, sind, hatte, gern, gerne, viele, nicht, kein, keine, mehr, vieles, ein, eine, sehr, muss, die, der, das, ja**. Roughly, %99 of the German written text includes at least one of these words, frequent personal pronouns, modal and auxiliary verbs, adverbs and articles. :wink:
 ```bash
@@ -185,4 +185,8 @@ with codecs.open("german_reviews.txt", "r", encoding="utf-8") as f:
 print counter
 
 ```
-At the end it doesn't look that bad indeed! 
+Here is the result:
+```bash
+Counter({u'die': 69698, u'der': 55810, u'das': 38734, u'den': 22346, u'dem': 12347, u'des': 6435})
+```
+It doesn't look that bad indeed. **Des** is half as **Dem**, which is not that bad. There are **205370** definite articles in  **32564**  reviews i.e. 6 article per review and **%3** of all articles is **Des**. Ok, it looks that bad now. **%3** is higher than I expected, but still looks very close to graveyard as well.
