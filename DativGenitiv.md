@@ -101,3 +101,42 @@ There is also adverbial genitive and some verbs that are used with genitive but 
 ## The Dataset
 
 We'll dig the Yelp restaurant reviews dataset, reviews from Germany has reviews in German generally. Reviews are written in informal language, hence ideal for our emprical study :wink:
+Go ahead and download the famous Yelp dataset. I pulled a little stunt to find German cities, flushed the list to `city_list.txt`. Reviewed restaurants are in:
+```
+
+Denkendorf
+Freyburg
+Filderstadt
+Ditzingen
+Waiblingen
+Neuhausen
+Henderson
+Fellbach
+Ludwigsburg
+Esslingen am Neckar
+Esslingen
+Stuttgart
+leonberg
+Boblingen
+Sindelfingen
+Stuttgart-Vaihingen
+Stuttgart - Bad Cannstatt
+Ostfildern
+Gerlingen
+Ludwigsburg
+Leinfelden-Echterdingen
+Kornwestheim
+Schwaikheim
+Remseck am Neckar
+Remseck
+```
+Then we're ready to find business_ids of restaurants in German cities with `find_id_from_city.sh`and write them into `ids.txt`. 7044 places joined Yelp dataset from Germany:
+```
+$wc -l ids.txt
+1044 ids.txt
+```
+In order to selec German restaurant reviews from `reviews.json`, I play a bit with `jq` instead of benefitting from chunk reading talents of **Pandas**. Foloowing lines will select lines from `reviews.json` where **business_id** is in `ids.txt`:
+```
+jq -R . ids.txt > ids.json
+jq --slurpfile ids ids.json 'map(select(.business_id as $id|any($ids[];$id==.)))' reviews.json > german_reviews.json
+```
