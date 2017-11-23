@@ -43,7 +43,7 @@ and replaced by von + dative combo in everyday spoken language:
 ```
 der Hund meines Bruders  ->  der Hund von meinem Bruder
 ```
-#1 murderer of this Dative. Though this construction is not incorrect, considered as "not very elegant". However, educated or not many people use these sort of construction in spoken language and informal written communication such as texting, emailing and blogging. That's how a language use one of its cases, in my opinon.
+#1 murderer is this usage of the Dative. Though this construction is not incorrect, considered as "not very elegant". However, educated or not many people use these sort of construction in spoken language and informal written communication such as texting, emailing and blogging. That's how a language use one of its cases, in my opinon.
 
 ### Prepositional Genitive
 
@@ -131,13 +131,58 @@ Remseck am Neckar
 Remseck
 ```
 Then we're ready to find business_ids of restaurants in German cities with `find_id_from_city.sh`and write them into `ids.txt`. 7044 places joined Yelp dataset from Germany:
-```
-$wc -l ids.txt
+```bash
+$ wc -l ids.txt
 1044 ids.txt
 ```
-In order to select German restaurant reviews from `reviews.json`, I play a bit with `jq` instead of benefitting from chunk reading talents of **Pandas**. Obviously such a huge json can't be read into memeory once, one has to iterate in chunks. However, as a text miner I play with **jq** a lot, here I decided to filter first German reviews then read them into Python. Surely **Pandas** provide nice methods for chunk iterating, but remember there's always more than one way to swim a fish :wink:
-Following lines will select lines from `reviews.json` where **business_id** is in `ids.txt`:
-```
+In order to select German restaurant reviews from `review.json`, I play a bit with `jq` instead of benefitting from chunk reading talents of **Pandas**. Obviously such a huge json can't be read into memeory once, one has to iterate in chunks. However, as a text miner I play with **jq** a lot, here I decided to filter first German reviews then read them into Python. Surely **Pandas** provide nice methods for chunk iterating, but remember there's always more than one way to swim a fish :wink:
+Following lines will select lines from `review.json` where **business_id** is in `ids.txt`:
+```bash
 jq -R . ids.txt > ids.json
-jq --slurpfile ids ids.json 'map(select(.business_id as $id|any($ids[];$id==.)))' reviews.json > german_reviews.json
+jq --slurpfile ids ids.json 'map(select(.business_id as $id|any($ids[];$id==.)))' review.json > german_reviews.json
 ```
+Note that there are also English reviews for German restaurants, mainly by expats. We'll make a small trick and filter mixed reviews by existence of the words **ich, Sie, und, aber, oder, bin, habe, kann, sind, hatte, gern, gerne, viele, nicht, kein, keine, mehr, vieles, ein, eine, sehr, muss, die, der, das, ja**. Roughly, %99 of the German written text includes at least one of these words, frequent personal pronouns, modal and auxiliary verbs, adverbs and articles. :wink:
+```bash
+$ egrep -i "\b(ich|Sie|und|aber|oder|bin|habe|kann|sind|hatte|gern|gerne|viele|nicht|kein|keine|mehr|vieles|ein|eine|sehr|muss|die|das|ja)" german_reviews.json > german_reviews.json
+```
+There are total **32564** reviews about 7044 different business, it seems:
+```bash
+$ wc -l german_reviews.json
+32564 german_reviews.json
+```
+After preparing the corpus, we're ready to move onto the counting parts. We keep the text only, we don't need the other fields such as stars or user id.
+```bash
+$ jq .text german_reviews.json > german_reviews.txt
+```
+
+### #1 Murderer: Nominal Genitive Replacements
+
+As I wrote previously, I suspect this is the most common type of avoiding the genitive. Basically we'll
+
+- count number of all definite articles **der, die, das, des, dem, den** and see percentage of **des** 
+- count all possessive noun phrases and see how many of them is with genitive. 
+
+For the first task, we iterate over all reviews and count tokens with **ART** tag. **ART** includes both definite and indefinite articles, so we need to filter the results a bit.
+```python
+from __future__ import unicode_literals
+
+import codecs
+from collections import Counter
+import spacy
+
+nlp = spacy.load("de")
+
+def_arts_list = ["die", "der", "das", "den", "dem", "des"]
+
+counter = Counter()
+
+with codecs.open("german_reviews.txt", "r", encoding="utf-8") as f:
+    for line in f:
+        review = nlp(line.strip())
+        def_arts = [t.text.lower() for t in review if t.tag_=="ART" and t.text.lower() in def_arts_list]
+        counter.update(def_arts)
+
+print counter
+
+```
+At the end it doesn't look that bad indeed! 
