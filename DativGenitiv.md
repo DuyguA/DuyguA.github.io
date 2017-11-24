@@ -320,5 +320,52 @@ wegen dem
 wegen einem
 trotz dem
 ```
-Naha!!! I caught Dative with his two hands covered in blood!! :grin:
+**NAHAAA!!!** I caught Dative with his two hands covered in blood!! :grin:
 Out of 1845 prepositional genitive constructions, 241 usages were wrongly with dative...looks like the real murderer here :scream: :scream: :scream:.
+
+### Genitive Pronouns
+
+Earlier we saw personal, relative, interrogative and demonstrative pronouns in genitive forms. Now we make a rough count. We'll find ratio of our genitive guys **wessen, desselben, derer, deren, dessen** to all words with pronoun tags **PDAT, PDS, PWS, PWAT, PWAV**. Here are the results:
+```
+counter.most_common()[:30]
+
+[(u'das', 12147),
+ (u'was', 6632),
+ (u'wie', 2995),
+ (u'diese', 2764),
+ (u'wer', 2628),
+ (u'dieses', 2175),
+ (u'dieser', 2138),
+ (u'diesem', 2041),
+ (u'wo', 1568),
+ (u'dies', 1346),
+ (u'diesen', 1053),
+ (u'die', 891),
+ (u'warum', 675),
+ (u'der', 584),
+ (u'wobei', 539),
+ (u'dem', 371),
+ (u'welche', 314),
+ (u'denen', 221),
+ (u'welches', 191),
+ (u'draussen', 178),
+ (u'deren', 157),
+ (u'drinnen', 154),
+ (u'welcher', 144),
+ (u'den', 140),
+ (u'weshalb', 135),
+ (u'wann', 126),
+ (u'dass', 125),
+ (u'dessen', 122),
+ (u'wem', 95),
+ (u'welchen', 89)]
+```
+Our friends **deren** and **dessen** made it to top 30, which is sort of a success. Distribution of the other genitive friends is as follows:
+```
+wessen  1
+desselben   1
+derjenigen  1
+derer   3
+dessen  122
+deren   157
+```
