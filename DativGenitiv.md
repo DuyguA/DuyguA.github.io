@@ -1,4 +1,4 @@
-## Dativ ist dem Genitiv sein Tod: Story of a Bloody Murder in SpaCy and Scipy
+## Dativ ist dem Genitiv sein Tod: Story of a Bloody Murder in SpaCy and Numpy
 
 German genitive case is roughly the case that marks possession and is expressed by the apostrophe ('s) and possessive "of" in English. See an quick example:
 ```
@@ -210,10 +210,58 @@ plt.show()
 Ok, it looks that bad now. **%3** is higher than I expected, but still looks very close to graveyard as well. In Turkish one can describe the situation with the idioms "To have one foot in the grave" or "To have eyes looking down to the soil".  
 
 In the second task, we'll do a more detailed count. We'll count all possessive noun phrases and see percentage of genitive. We count
-```bash
-ART NN ART ADJA? NN         der Beruf des (alten) Mannes
-ART ADJA? NN NN             des alten mannes Beruf
-ART NN PPOSAT NN            der Hund meines Bruders
-ART NN APPR PPOSAT NN       der Hund von meinem Bruder
 ```
-sequences and filter by some small tricks to distinguish genitive ones :wink: .
+ART NN ART ADJA? NN             der Beruf des (alten) Mannes
+ART ADJA? NN NN                 des alten mannes Beruf
+ART NN PPOSAT NN                der Hund meines Bruders
+ART NN APPR (ART|PPOSAT) NN     der Hund von meinem Bruder, der Weg von der Haltestelle
+```
+sequences and filter by some small tricks to distinguish genitive ones :wink:. 
+We begin by counting noun chunks of the form 4th. We'll use **Matcher** class from **Spacy** to match POS tags. Then we'll do a filtering by existing of **vor** because **APPR (ART|PPOSAT)** matches a bigger superclass of strings of interest, see some:
+```
+einer Woche mit einem Groupon
+der Kellner mit einem Grinsen
+die Schmiereien in den Toiletten
+der Kellner mit der Speisekarte, dem Wunsch nach der Rechnung
+```
+Note that German POS tags of Spacy come from  [Stuttgart tagset](http://www.ims.uni-stuttgart.de/forschung/ressourcen/lexika/TagSets/stts-table.html). German tagset is richer than English counterpart, due to rich morphology.
+I will do a very rough preprocessing, then do the counting:
+```python
+from spacy.matcher import Matcher
+from spacy.attrs import TAG
+
+matcher = Matcher(nlp.vocab)
+
+tags = [
+    [{TAG:"ART"}, {TAG:"NN"}, {TAG:"APPR"}, {TAG:"PPOSAT"}, {TAG:"NN"}],
+    [{TAG:"ART"}, {TAG:"NN"}, {TAG:"APPR"}, {TAG:"ART"}, {TAG:"NN"}],
+    ]
+
+[matcher.add_pattern("noun noun chunk", tag_pattern) for tag_pattern in tags]
+
+little_preprocess = lambda rev: " ".join(rev.replace("\n", " ").strip().split())
+
+vors = ["vor ", "vom ", "von "]
+count = 0 
+with codecs.open("german_rev.txt", "r", encoding="utf-8") as f:
+    for line in f:
+        review = nlp(little_preprocess(line))
+        matches = matcher(review)
+        match_strings = [review[m[-2]:m[-1]] for m in matches]
+        match_strings = filter(lambda match: any(v in match.text for v in vors), match_strings)
+        count += len(match_strings)
+print count
+```
+Result is **451** and some example matches are:
+```
+einen Zeitungsberricht von der Eröffnung
+Ein Freisitz vor dem Restaurant
+Der Ausblick von der Terrasse
+Die Sepia von der Tageskarte
+ein Fleischgericht von der Tageskarte
+der Nähe von der Bar
+der Tisch von der Kellnerin
+den Platz vor dem Salatbüffet
+```
+
+
