@@ -239,11 +239,11 @@ tags = [
 
 [matcher.add_pattern("noun noun chunk", tag_pattern) for tag_pattern in tags]
 
-little_preprocess = lambda rev: " ".join(rev.replace("\n", " ").strip().split())
+little_preprocess = lambda rev: " ".join(rev.replace("\\n", " ").strip().split())
 
 vors = ["vor ", "vom ", "von "]
 count = 0 
-with codecs.open("german_rev.txt", "r", encoding="utf-8") as f:
+with codecs.open("german_reviews.txt", "r", encoding="utf-8") as f:
     for line in f:
         review = nlp(little_preprocess(line))
         matches = matcher(review)
@@ -262,6 +262,63 @@ ein Fleischgericht von der Tageskarte
 der Nähe von der Bar
 der Tisch von der Kellnerin
 den Platz vor dem Salatbüffet
+[Die Pizza von meinem Mann
+dem Elefanten von unserem Nachbarn (Elefants of our neighbor)?!!?
 ```
+Now we count "real" genitives. We pull the same stunt with **Matcher** with the corresponding POS tags. Here are some examples from the matched strings:
+```
+eine Nachbau des antiken Kolosseums
+des Spaßfaktors den Besuch
+Die Kreationen des Küchenchefs
+Die Besonderheit des Restaurants
+den Sternen des Hotels
+das Thema des Hotel
+Der Hummus des Tages
+das Geheimnis des Ladens
+Das Highlight des Abends
+die Qualität des Essens
+des Geschmacks des Essens
+Das Konzept des Ladens, das Konzept des Restaurants, einem Drittel des Gerichtes, den Eindruck des Ambientes
+die Qualität des alten Mövenpicks
+die Qualität des Fisches
+die Qualität des Sushis
+```
+and the number is **2474?!!??**. Good Lord, either I counted dative constructions wrong or ... I should stop writing immediately :flushed: My theory is completely wrong?!(so is Bastian Sick, [sorry](http://www.spiegel.de/kultur/zwiebelfisch/zwiebelfisch-der-dativ-ist-dem-genitiv-sein-tod-a-267725.html) Herr Sick!)
 
+### Wrong Usages with Prepositional Genitive
 
+Ok, here also we use **Matcher** class as follows: First we'll match phrases of the form **One of Genitive Prepositions + Article**. Then, we'll count how many of the articles definite or indefinite in genitive or dative and compare the numbers. Note that Dative usage is **WRONG**, unlike von + dative replacements. Let's hit it:
+
+```
+preplist = [ 
+u"jenseits",      
+u"anlässlich",    
+u"kraft",         
+u"anstelle",      
+u"laut",          
+u"aufgrund",    
+u"seitens",       
+u"außerhalb", 
+u"trotz",         
+u"bezüglich",     
+u"während",     
+u"innerhalb",     
+u"wegen"         
+]
+
+from spacy.matcher import Matcher
+from spacy.attrs import TAG, ORTH
+matcher = Matcher(nlp.vocab)
+tags = [[{ORTH:w}, {TAG:"ART"}] for w in preplist]
+    
+[matcher.add_pattern("noun noun chunk", tag_pattern) for tag_pattern in tags]
+```
+Rest is almost same with previous iterating over the corpus and counting code. Here are some wrong usages with dative:
+```
+während dem
+wegen dem
+wegen einem
+trotz dem
+```
+Naha!!! I caught Dative with his two hands covered in blood!! :grin:
+Out of 1845 prepositional genitive constructions, 241 usages were wrongly with dative...looks like the real murderer here :scream: :scream: :scream:.
