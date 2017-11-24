@@ -189,7 +189,7 @@ Here is the result:
 ```bash
 Counter({u'die': 69698, u'der': 55810, u'das': 38734, u'den': 22346, u'dem': 12347, u'des': 6435})
 ```
-![result barchart](https://github.com/DuyguA/DuyguA.github.io/blob/master/dem_histo.png)
+![](https://github.com/DuyguA/DuyguA.github.io/blob/master/dem_barchart.png)
 
 It doesn't look that bad indeed. **Des** is half as **Dem**, which is not that bad. There are **205370** definite articles in  **32564**  reviews i.e. 6 article per review and **%3** of all articles is **Des**. Ok, it looks that bad now. **%3** is higher than I expected, but still looks very close to graveyard as well.
 In the second task, we'll do a more detailed count. We'll count all possessive noun phrases and see percentage of genitive. We count
