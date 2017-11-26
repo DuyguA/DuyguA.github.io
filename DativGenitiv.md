@@ -143,7 +143,7 @@ $ jq --slurpfile ids ids.json 'map(select(.business_id as $id|any($ids[];$id==.)
 ```
 Note that there are also English reviews for German restaurants, mainly by expats. We'll make a small trick and filter mixed reviews by existence of the words **ich, Sie, und, aber, oder, bin, habe, kann, sind, hatte, gern, gerne, viele, nicht, kein, keine, mehr, vieles, ein, eine, sehr, muss, die, der, das, ja**. Roughly, %99 of the German written text includes at least one of these words, frequent personal pronouns, modal and auxiliary verbs, adverbs and articles. :wink:
 ```bash
-$ egrep -i "\b(ich|Sie|und|aber|oder|bin|habe|kann|sind|hatte|gern|gerne|viele|nicht|kein|keine|mehr|vieles|ein|eine|sehr|muss|die|das|ja)" german_reviews.json > german_reviews.json
+$ egrep -i "\b(ich|Sie|und|aber|oder|bin|habe|kann|sind|hatte|gern|gerne|viele|nicht|kein|keine|mehr|vieles|ein|eine|sehr|muss|die|das|ja)\b" german_reviews.json > german_reviews.json
 ```
 There are total **32564** reviews about 7044 different business, it seems:
 ```bash
