@@ -369,5 +369,15 @@ derer   3
 dessen  122
 deren   157
 ```
-Genitive friends looks miserable comparing to the popular guys:
+
+Genitive friends looks a bit miserable comparing to popular guys:
+
 ![](https://github.com/DuyguA/DuyguA.github.io/blob/master/wessen.png)
+
+Good news is they do exist, bad news is they barely exist. However, there's no solid murderer party here; there's no conclusive sign that Dative committed his sins here as well. Then who is to blame? 
+
+### Conclusion
+
+After all the investigation, this murder trial didn't quite come to a full conclusion. The Dative has blood in his hands definitely; however the Genitive doesn't look completely dead, but with serious wounds. Best we can do is to ive our best wishes to the victim and hope he continues his existance further. Neverthless, don't bother for him too much. Life is too short to learn Germn anyway :relaxed:
+
+
