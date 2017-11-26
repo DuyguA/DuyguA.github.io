@@ -5,7 +5,7 @@ German genitive case is roughly the case that marks possession and is expressed 
 Die Nachrichten des Tages          news of the day
 Der Beruf des Mannes ist Arzt.     Profession of the man is doctor./Man's profession is doctor.
 ```
-The genitive of possession and relationships occurs frequently in formal standart German. For instance the following sentence about private customer loans, is from Deutsche Bank customer service, 
+The genitive of possession and relationships occurs frequently in formal standart German. For instance the following sentence about private customer loans, is from Deutsche Bank customer service website:
 ```
 Sie ist befugt, den Darlehensnehmer bei der Beantragung des Darlehens zu 
 ```
@@ -20,8 +20,8 @@ In this post, we'll carry an emprical examination if Dative really replaced Geni
 
 Basically what we'll do is: 
 - Collect samples
-- Look for all genitive forms and how many of them is real genitive, how many of them dative replacement
-- Look for genitive prepositions, see how many of them used correctly
+- Look for all genitive forms and count how many of them is real genitive, how many of them dative replacement
+- Look for genitive prepositions, count how many of them used correctly
 - Count occurences of **Dessen**, **Deren** and **Wessen**, see the explanations below
 
 First, let's see the genitive case in detail, then we can jump onto our dataset and do the hypothesis testing!
@@ -43,7 +43,7 @@ and replaced by von + dative combo in everyday spoken language:
 ```
 der Hund meines Bruders  ->  der Hund von meinem Bruder
 ```
-#1 murderer is this usage of the Dative. Though this construction is not incorrect, considered as "not very elegant". However, educated or not many people use these sort of construction in spoken language and informal written communication such as texting, emailing and blogging. That's how a language use one of its cases, in my opinon.
+#1 murderer is, this usage of the Dative. Though this construction is not incorrect, considered as "not very elegant". However, educated or not many people use these sort of construction in spoken language and informal written communication such as texting, emailing and blogging. That's how a language use one of its cases, in my opinon.
 
 ### Prepositional Genitive
 
@@ -133,7 +133,7 @@ Remseck
 Then we're ready to find business_ids of restaurants in German cities with `find_id_from_city.sh`and write them into `ids.txt`. 7044 places joined Yelp dataset from Germany:
 ```bash
 $ wc -l ids.txt
-1044 ids.txt
+7044 ids.txt
 ```
 In order to select German restaurant reviews from `review.json`, I play a bit with `jq` instead of benefitting from chunk reading talents of **Pandas**. Obviously such a huge json can't be read into memeory once, one has to iterate in chunks. However, as a text miner I play with **jq** a lot, here I decided to filter first German reviews then read them into Python. Surely **Pandas** provide nice methods for chunk iterating, but remember there's always more than one way to swim a fish :wink:
 Following lines will select lines from `review.json` where **business_id** is in `ids.txt`:
