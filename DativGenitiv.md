@@ -224,7 +224,7 @@ der Kellner mit einem Grinsen
 die Schmiereien in den Toiletten
 der Kellner mit der Speisekarte, dem Wunsch nach der Rechnung
 ```
-Note that German POS tags of Spacy come from  [Stuttgart tagset](http://www.ims.uni-stuttgart.de/forschung/ressourcen/lexika/TagSets/stts-table.html). German tagset is richer than English counterpart, due to rich morphology.
+Note that German POS tags of Spacy come from  [Stuttgart tagset](http://www.ims.uni-stuttgart.de/forschung/ressourcen/lexika/TagSets/stts-table.html). German tagset is richer than English counterpart, due to rich morphosyntactic features. Text miners who work with German are acquainted with Stuttgart tagset, which is the standart tagset for German language. Don't worry if you're not %100 comfortable with the tagset, you can make a rough mapping onto English counterparts :wink: 
 I will do a very rough preprocessing, then do the counting:
 ```python
 from spacy.matcher import Matcher
