@@ -10,4 +10,5 @@ Please feel free to connect on [LinkedIn](https://www.linkedin.com/in/duygu-alti
 ### Posts
 
 * Oct 13, 2017  [The Curious Case of Turkish Articulatory Phonetics](https://cdn.rawgit.com/DuyguA/DuyguA.github.io/master/TPhone.html)
+* Nov 26, 2017 [Dativ ist dem Genitiv sein Tod: Story of a Bloody Murder in SpaCy and Numpy](https://github.com/DuyguA/DuyguA.github.io/blob/master/DativGenitiv.md)
 
