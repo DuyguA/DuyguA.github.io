@@ -135,7 +135,7 @@ Then we're ready to find business_ids of restaurants in German cities with `find
 $ wc -l ids.txt
 7044 ids.txt
 ```
-In order to select German restaurant reviews from `review.json`, I play a bit with `jq` instead of benefitting from chunk reading talents of **Pandas**. Obviously such a huge json can't be read into memeory once, one has to iterate in chunks. However, as a text miner I play with **jq** a lot, here I decided to filter first German reviews then read them into Python. Surely **Pandas** provide nice methods for chunk iterating, but remember there's always more than one way to swim a fish :wink:
+In order to select German restaurant reviews from `review.json`, I play a bit with `jq` instead of benefitting from chunk reading talents of **Pandas**. Obviously such a huge json can't be read into memory once, one has to iterate in chunks. However, as a text miner I play with **jq** a lot, here I decided to filter first German reviews then read them into Python. Surely **Pandas** provide nice methods for chunk iterating, but remember there's always more than one way to swim a fish :wink:
 Following lines will select lines from `review.json` where **business_id** is in `ids.txt`:
 ```bash
 $ jq -R . ids.txt > ids.json
