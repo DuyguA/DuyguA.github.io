@@ -1,6 +1,6 @@
 ## Dativ ist dem Genitiv sein Tod: Story of a Bloody Murder in SpaCy and Numpy
 
-German genitive case is roughly the case that marks possession and is expressed by the apostrophe ('s) and possessive "of" in English. See an quick example:
+German genitive case is roughly the case that marks possession and is expressed by the apostrophe ('s) and possessive "of" in English. See quick examples:
 ```
 Die Nachrichten des Tages          news of the day
 Der Beruf des Mannes ist Arzt.     Profession of the man is doctor./Man's profession is doctor.
