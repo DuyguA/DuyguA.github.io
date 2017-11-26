@@ -265,7 +265,7 @@ den Platz vor dem Salatbüffet
 [Die Pizza von meinem Mann
 dem Elefanten von unserem Nachbarn (Elefants of our neighbor)?!!?
 ```
-Now we count "real" genitives. We pull the same stunt with **Matcher** with the corresponding POS tags. Here are some examples from the matched strings:
+Now we count the "real" genitives. We pull the same stunt with **Matcher** with the corresponding POS tags. Here are some examples from the matched strings:
 ```
 eine Nachbau des antiken Kolosseums
 des Spaßfaktors den Besuch
@@ -287,7 +287,7 @@ and the number is **2474?!!??**. Good Lord, either I counted dative construction
 
 ### Wrong Usages with Prepositional Genitive
 
-Ok, here also we use **Matcher** class as follows: First we'll match phrases of the form **One of Genitive Prepositions + Article**. Then, we'll count how many of the articles definite or indefinite in genitive or dative and compare the numbers. Note that Dative usage is **WRONG**, unlike von + dative replacements. Let's hit it:
+Ok, here also we use **Matcher** class as follows: First we'll match phrases of the form **one of Genitive Prepositions + Article**. Then, we'll count how many of the articles both definite and indefinite, in genitive or in dative and compare the numbers. Note that Dative usage is **WRONG**, unlike von + dative replacements. Let's hit it:
 
 ```
 preplist = [ 
@@ -320,8 +320,8 @@ wegen dem
 wegen einem
 trotz dem
 ```
-**NAHAAA!!!** I caught Dative with his two hands covered in blood!! :grin:
-Out of 1845 prepositional genitive constructions, 241 usages were wrongly with dative...looks like the real murderer here :scream: :scream: :scream:.
+**Nahaa!!!** I caught Dative with his two hands covered in blood!! :grin:
+Out of 1845 prepositional genitive constructions, 241 usages were wrongly with dative...looks like the real murderer is here :scream: :scream: :scream:.
 
 ### Genitive Pronouns
 
@@ -360,7 +360,7 @@ counter.most_common()[:30]
  (u'wem', 95),
  (u'welchen', 89)]
 ```
-Our friends **deren** and **dessen** made it to top 30, which is sort of a success. Distribution of the other genitive friends is as follows:
+Our friends **deren** and **dessen** made it to top 30, which is sort of a success. Distribution of our genitive friends is as follows:
 ```
 wessen  1
 desselben   1
@@ -369,3 +369,5 @@ derer   3
 dessen  122
 deren   157
 ```
+Genitive friends looks miserable comparing to the popular guys:
+![](https://github.com/DuyguA/DuyguA.github.io/blob/master/wessen.png)
