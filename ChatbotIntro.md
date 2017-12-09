@@ -75,7 +75,7 @@ an intro, %90 of the language data structures are **Graph** and %90 of that %90 
 think sentence/time goes from left to right and builds a lattice. We'll come to this issue later on.) Especially in 
 language modelling, DAGs provide uber-efficient solutions and used extensively in MT and ASR platforms.
 
-Series will provide examples on German(morphologically complex), Turkish(morphologically rich, agglunative) and English
+Series will provide examples on German(morphologically complex), Turkish(morphologically rich, agglutinative) and English
 (morphologically not very interesting) languages. We'll discover banking/financial, sales and general customer care 
 domains. 
 I should warn readers beforehand that series contain a big amount worshipping to father Turing. At the very end, he's 
