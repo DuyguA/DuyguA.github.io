@@ -2,6 +2,7 @@
 
 Chatbot NLU is difficult; I mean **really, really, extremely** difficult. In this series, I'll share the knowledge that 
 I gain from my experiments. Most of the ideas also applies to e-mail classificiation tasks and information extraction.
+
 Charging meaning to short text has always been a though task, it's even thougher when **context** info comes to play.
 Consider the short fragment of a financial chatbot:
 
@@ -38,8 +39,8 @@ their own knowledgebase, products and rates differ for BankA and BankB.
 
 Coming to the scientific view, when it comes to any sort of NLU, one has to hit as hard as (s)he can. In everyday life, I benefit from 
 all classes in the Chomsky hierarchy, regular, context free and Turing-acceptable and of course...substring look-up, 
-our old friend! (he has a special place in my heart):wink: Statistical models are Turing machines, fancy, exciting and 
-surprising ones; but **still** Turing machines. And costly Turing machines. Here then comes the #1 principle of good engineering,
+our old friend! (he has a special place in my heart):wink: Statistical models are Turing machines; fancy, exciting and 
+surprising ones, but **still** Turing machines. And costly Turing machines. Here then comes the #1 principle of good engineering,
 simplest solution **is always** the best solution: easier to develop, easier to test and requires less human resource.
 Throughout this series, you'll see that I'll try to pick the simplest solution to the tasks; if conquering the problem
 with a context free parser is possible, there's no point developing a statistical model. In general, a  statistical model is a big-hammer:
