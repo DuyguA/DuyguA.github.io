@@ -57,7 +57,7 @@ and things can get much worse. Consider the following conversation fragment abou
 - At 3rd line, again `bestellen` and `başvuru` belongs to the entity `Kredit/Kredi`.
 - This time 5th line has a different problem. Attribute is not stated completely, i.e. `per Telefon/Telefonla` is indeed `per Telefon bestellen/Telefonla başvuru`. Now it's tougher, because resolution is **half** from 2 lines up, `Internet bestellen/Internetten başvuru` is there, however different from 1st scenario this time but entity of interest `Kredit/Kredi` is **too** far and buying with phone's resolution depend's on previous entity's resolution. Also question type is the same, 3rd line is a **yes no question**, so is 5th line. 
 
-Yes, keeping the dialogue state and resolving, i.e. understanding what is written can go insane very quickly.
+Yes, keeping the dialogue state and resolving, i.e. understanding what is written can go insane very quickly. Surely a network with memory can correctly decide how much to keep and how much to forget from previous messages, but memory and attention requires learning many parameters hence a giant training set, which is a luxury for dialogu systems(at least for now). 
 
 Coming to the scientific view, when it comes to any sort of NLU, one has to hit as hard as (s)he can. In everyday life, I benefit from 
 all classes in the Chomsky hierarchy, regular, context free and Turing-acceptable and of course...substring look-up, 
