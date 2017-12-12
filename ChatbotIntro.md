@@ -35,7 +35,7 @@ interrogative pronoun is not there.
 is `conditions for Mastercard`, `Zinsen bei Mastercard` and `Masterkart'ın faiz oranı`
 
 - Again, bot has to have a knowledgebase for the product. Also, every customer bank who uses this bot gotta has 
-their own knowledgebase, products and rates differ for BankA and BankB.
+their own knowledgebase, product names, rates and conditions differ for BankA and BankB.
 
 and things can get much worse. Consider the following conversation fragment about bank loans:
 
