@@ -75,6 +75,8 @@ an intro, %90 of the language data structures are **Graph** and %90 of that %90 
 think sentence/time goes from left to right and builds a lattice. We'll come to this issue later on.) Especially in 
 language modelling, DAGs provide uber-efficient solutions and used extensively in MT and ASR platforms.
 
+Many NLP tasks has special data structures invented for them: inverted index, Trie, Bloom Filter, different sorts of hash functions optimized on a spesific language...However, holding semantics data is not that straightforward(at least to me), put efficiency to the one side, even the simplest question: **What is the optimal representation/data structure for keeping the context information/dialogue flow** have many answers hence no state-of-art answer.
+
 Series will provide examples on German(morphologically complex), Turkish(morphologically rich, agglutinative) and English
 (morphologically not very interesting) languages. We'll discover banking/financial, sales and general customer care 
 domains. 
