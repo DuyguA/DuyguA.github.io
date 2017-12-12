@@ -26,7 +26,7 @@ Consider the short fragment of a financial chatbot:
 Even in such a short converstaion fragment, there are multiple issues to be solved:
 
 - What is the answer to the first question? I mean, bot **has to** have some knowledge about products. 
-- At 3rd line, human brain resolves that `conditions/der Zins` belong to the `Mastercard`. Nobody would write 
+- At 3rd line, human brain resolves that `conditions/der Zins/faiz oranı` belong to the `Mastercard`. Nobody would write 
 `what are the conditions for the Mastercard?` , even `what is` part is skipped in German version. Here there are 2 problems:
 
 - In German version, there's **no** decent question with a **wh-word**. Even though it's a **wh-question** obviously,
