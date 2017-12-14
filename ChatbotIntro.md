@@ -1,4 +1,4 @@
-# Chatbot NLU Series, Introduction
+# Chatbot NLU, Introduction
 
 Chatbot NLU is difficult; I mean **really, really, extremely** difficult. In this series, I'll share the knowledge that 
 I gain from my experiments. Most of the ideas also applies to e-mail classificiation tasks and information extraction.
