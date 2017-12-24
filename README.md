@@ -2,9 +2,11 @@
 
 contains code, fun, new methods in Language & Speech processing.
 
-Efficient methods in parsing, preprocessing....Chatbot NLU ; tips and tricks
+Efficient methods of parsing, preprocessing, statistical learning in Chatbot NLU 
 
-in improving  ASR, TTS by linguistic and statistical methods
+Methods, tips and tricks in improving  ASR, TTS, MT by linguistic and statistical methods including deep learning
+
+Nice blends of linguistics and deep learning
 
 This blog is generate by super cool [Jekyll](https://jekyllrb.com/).
 
