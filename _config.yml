@@ -5,4 +5,9 @@ description: From Neural Networks to CFG Parsers Fun in Language&Speech
 base_url: ""
 url: "http://DuyguA.github.io"
 plugins:
+  - jeykll-avatar
+  - jeykll-redirect-from
   - jeykll-seo-tag
+  - jeykll-coffeescript
+  - jeykll-sitemap
+  - jeykll-octicons
