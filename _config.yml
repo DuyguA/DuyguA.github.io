@@ -25,6 +25,3 @@ kramdown:
 
 paginate: 10
 paginate_path: "blog/p:num"
-
-plugins:
-  jemoji
