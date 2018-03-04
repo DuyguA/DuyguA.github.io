@@ -1,3 +1,12 @@
+---
+layout: post
+title: Chatbot NLU, Introduction
+date: 2017-12-17 09:00:00
+categories: [blog]
+tags: [chatbot nlu]
+comments: true
+---
+
 # Chatbot NLU, Introduction
 
 Chatbot NLU is difficult; I mean **really, really, extremely** difficult. In this series, I'll share the knowledge that 
