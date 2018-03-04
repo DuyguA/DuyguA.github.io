@@ -5,7 +5,6 @@ date: 2017-12-17 09:00:00
 categories: [blog]
 tags: [chatbot nlu]
 comments: false
-preview_pic: 
 ---
 
 # Chatbot NLU, Introduction
