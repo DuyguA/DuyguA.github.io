@@ -1,10 +1,11 @@
 ---
 layout: post
-title: Chatbot NLU, Introduction
+title: Chatbot NLU Introduction
 date: 2017-12-17 09:00:00
 categories: [blog]
 tags: [chatbot nlu]
-comments: true
+comments: false
+preview_pic: 
 ---
 
 # Chatbot NLU, Introduction
