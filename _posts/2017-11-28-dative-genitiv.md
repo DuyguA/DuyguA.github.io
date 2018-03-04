@@ -385,7 +385,7 @@ deren   157
 Genitive friends looks a bit miserable comparing to popular guys:
 
 <figure>
-  <img class="halfw" src="/assets/wessen.png" alt="wessen.png">
+  <img class="halfw" src="/assets/images/wessen.png" alt="wessen.png">
 </figure>
 
 Good news is they do exist, bad news is they barely exist. However, there's no solid murderer party here; there's no conclusive sign that Dative committed his sins here as well. Then who is to blame? 
