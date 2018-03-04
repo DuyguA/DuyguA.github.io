@@ -4,7 +4,7 @@ title: Archive
 permalink: /archive/
 ---
 
-{% assign years = "2014,2013,2012" | split: "," %}
+{% assign years = "2018,2017" | split: "," %}
 {% for year in years %}
   <h3 style="border-bottom: 1px solid #e0e0e0">{{ year }}</h3>
   <ul style="margin-left: 0px; padding-left: 0px; list-style: none">
