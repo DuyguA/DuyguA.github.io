@@ -1,13 +1,29 @@
-theme: jekyll-theme-cayman
 title: Adventures in NLP
-github_username: DuyguA
-description: From Neural Networks to CFG Parsers Fun in Language&Speech
-base_url: ""
-url: "http://DuyguA.github.io"
-plugins:
-  - jeykll-avatar
-  - jeykll-redirect-from
-  - jeykll-seo-tag
-  - jeykll-coffeescript
-  - jeykll-sitemap
-  - jeykll-octicons
+tagline: "From Neural Networks to CFG Parsers Fun in Language & Speech"
+description: "From Neural Networks to CFG Parsers Fun in Language & Speech"
+baseurl: ""
+url: "https://DuyguA.github.io/"
+email: duygu.altinok12@gmail.com
+github_username:  DuyguA
+linkedin_link: https://www.linkedin.com/in/duygu-altinok-4021389a/
+timezone: America/New_York
+
+markdown: kramdown
+permalink: pretty
+#excerpt_separator: <!--more-->
+
+kramdown:
+  auto_ids: true
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..6
+  smart_quotes: lsquo,rsquo,ldquo,rdquo
+  use_coderay: false
+  input: GFM
+
+#lsi: true
+
+paginate: 10
+paginate_path: "blog/p:num"
+
+
