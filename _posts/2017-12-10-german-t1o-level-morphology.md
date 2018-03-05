@@ -5,7 +5,7 @@ date: 2017-12-10 09:00:00
 categories: [blog]
 tags: [german nlp, german 2-level morphology]
 comments: false
-preview_pic: /assets/images/wessen.png
+preview_pic: /assets/images/german-morph.png
 ---
 
 # German 2-Level Morphology
@@ -49,9 +49,7 @@ e.g: boxes, churches, spies (+.e)
 - K-insertion: panicked
 
 That's it, really it. You can express English inflectional morphology with 9 FSTs.  
-
-German morphology is mainly concatenative. Inflection, derivation and composition are done via concatenation. Infelctions occur as adjective, noun declensions and verb conjugations. For example:
-
+German morphology is mainly concatenative. Inflection, derivation and composition are done via concatenation. Infelctions occur as adjective, noun declensions and verb conjugations. For example,
 Nominal number inflection:
 
 ```sh
@@ -76,7 +74,10 @@ roter → rot(red) ADJ, base, nogender, gen, plural, strong
 Circumfixing is used in making regular past participles: e.g. `gespielt(played) → ge+spielen(play)+t` . Prefixes, suffixes and circumfixes all occur in German language, different from English, one needs to compose more FSTs.
 In my own implementations, I usually focus on derivations that involves nouns, adjectives and verbs. Most of the sentence level information “who, when, how”, as well as sentence tense is contained in these three classes. Verbs admit special attention from my morphological processor unit designs to understand the “action” of the sentence better. For instance, “angerufen” (have phoned) is a frequent verb from customer service corpora:
 
-PICCCCCCCCCCCCCCCCCC HERE
+<figure>
+  <img class="fullw" src="/assets/images/german-morph.png" alt="german-morph.png">
+</figure>
+
 
 Nouns are not very difficult to recognize due to capitalization, `essen – Essen (to eat – food)`. Verbs admit  three typical suffixes `-en, -eln, -ern`, adjectivization is similar for instance `Tag – täglich (day – daily)`. Here, derivation might cause stem vowel changes as Umlaut and Ablaut shifts.
 
@@ -85,6 +86,11 @@ While implementing  German 2-level morphology, I treat non-concatenative events 
 Adjective and noun declensions are described by suffixes in general, however irregular declensions occur frequently. For instance many foreign nouns have irregular plurals, e.g. `der Modus-des Modus-die Modi`, as well as ordinary adjectives `gut-besser-am besten`. Here, we separate irregular forms and stems into different sorts of lexicons.  
 
 In conclusion, inflectional and derivational morphology processing unit involves regular and irregular word lexicons as FSTs, prefix-suffix-circumfix FSTs and nonconcatenative event FSTs to cope with stem changes. 
+
+### Compositional Morphology
+
+Productivity of the German language indeed comes from composing words to form new words, **Mammutwörter**. This process can occur with nouns, adjectives, adverbs, verbs but most productive in the case of the nouns. Compound words are richness of Germanic languages, as well as trouble of statistical machine translation and source of %90 of the **OOV**s.
+
 
 
 
