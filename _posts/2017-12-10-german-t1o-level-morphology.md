@@ -21,7 +21,7 @@ However, we’ll use morphological analysis more in this post:
 
 ```sh
 girls  ↔ girl<+N><Plu>            gegangen → gehen<+V><PPast>
-walked ↔ walk<+V><Past>           gegangen<+ADJ><Pos>
+walked ↔ walk<+V><Past>                      gegangen<+ADJ><Pos>
 ```
 
 Computationally, 2-level morphology processing consists of language specific components, the lexicon and the context rules and finite state transducers. Environment of the rules are also specified as a string of two-level correspondences e.g.  `i/y <=> __ e/0 + /0 i`. Rules constrain lexical/surface correspondences and the environment in which correspondence is allowed, prohibited or required. Several lexicons, usually by grammatical category and regularity/irregularity makes up the dictionary component. FST provides processing rules in parallel, as well as offering memory and time efficient solutions.   
@@ -53,8 +53,8 @@ German morphology is mainly concatenative. Inflection, derivation and compositio
 The nominal number inflection:
 
 ```sh
-Freund  →  Freund(friend)  N, masc, acc/nom/dat, singular
-Freunde →  Freund(friends) N, masc, acc/gen/nom, plural
+Freund  →  Freund(friend)  N, masc, acc/nom/dat,singular
+Freunde →  Freund(friends) N, masc, acc/gen/nom,plural
 ``` 
 
 Adjectives and nouns are inflected upto gender, number and case:
@@ -66,10 +66,10 @@ Kalt → kalter, kaltem, kaltes, kalte, kalten
 One surface form might map to more than one distinct lexical forms:
 
 ```sh
-roter →  rot(red) ADJ, base, nogender, gen, plural, strong
-         rot ADJ, base, fem, dat/gen, singular, strong
-         rot ADJ, base, masc, nom, sing, strong
-         rot ADJ, comparative
+roter →  rot(red) ADJ,base,nogender,gen,plural,strong
+         rot ADJ,base,fem,dat/gen,singular,strong
+         rot ADJ,base,masc,nom,sing,strong
+         rot ADJ,comparative
 ```
 
 Circumfixing is used in making regular past participles: e.g. `gespielt(played) → ge+spielen(play)+t`. Prefixes, suffixes and circumfixes all occur in German language, different from English; consequently one needs to compose more FSTs.  
@@ -98,8 +98,8 @@ Decomposing compound words is not a trivial task, not always words come together
 According to my own statistics:) about 2/3 of the compounds occur without **Fugenelemente**, I estimate `-(e)s and -(e)n` to occur 20-25 per cent, while `-e` is much rare, I would say 2 per cent. About 92 per cent of the compounds consist of two words, rest is 3 word compounds and 4 word compounds occurs almost none. Here are two frequent compounds from business e-mailing, one being a verb, the other a noun:
 
 ```sh
-weitergeleitet → weiter<#>leiten V,Ppast
-Weiterleitung → weiter<#>leit+ung   N, nom/acc/dat/gen, singular
+weitergeleitet →  weiter\<#>leiten     V,PPast
+Weiterleitung  →  weiter\<#>leit+ung   N,nom/acc/dat/gen,singular
 ```
 Decomposing compound words with FST is possible, jumping from the end of a word to the beginning of another word should emit a word boundary symbol, **<#>**. However, we shouldn’t forget to compose with the *Fugenelement FST* and *Umlautung FST*. This way, one can transduce all possible splittings of a compound, which splits are feasible or “make sense” is whole another issue. My in-house tool generates all possible splits, then filtered by impossible POS tag combinations (e.g. beiden is not bei<#>den) and a language model. For instance “Rohrohrzucker” has 2 possible splits:
 
