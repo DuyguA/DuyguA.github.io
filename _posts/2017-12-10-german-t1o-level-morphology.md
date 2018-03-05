@@ -10,7 +10,7 @@ preview_pic: /assets/images/wessen.png
 
 # German 2-Level Morphology
 
-2-level morphology is commonly being used for morphological analysis of morphologically complex languages since 1980s. Given surface form, we aim to find the lexical form(s) (possibly more than one, as we’ll see soon) and vice versa, switch between the surface form and the lexical form hence the morphological analysis easily. FSTs are used to map a regular language(surface language) to another regular language(lexical language). The lexical and surface levels are connected via several FSTs.
+2-level morphology is commonly being used for morphological analysis of morphologically complex languages since 1980s. Given surface form, one aims to find the lexical form(s) (possibly more than one, as we’ll see soon) and vice versa, switch between the surface form and the lexical form hence the morphological analysis easily. FSTs are used to map a regular language(surface language) to another regular language(lexical language). The lexical and surface levels are connected via several FSTs.
 
 ```sh
 Lexical form:  s p y + 0 s	g e h en+  s t
@@ -49,4 +49,30 @@ e.g: boxes, churches, spies (+.e)
 - K-insertion: panicked
 
 That's it, really it. You can express English inflectional morphology with 9 FSTs.
-German morphology is mainly  
+German morphology is mainly concatenative. Inflection, derivation and composition are done via concatenation. Infelctions occur as adjective, noun declensions and verb conjugations. For example:
+
+Nominal number inflection:
+
+```sh
+Freund → Freund(friend)  N, masc, acc/nom/dat, singular
+Freunde → Freund(friends) N, masc, acc/gen/nom, plural
+``` 
+
+Adjectives and nouns are inflected upto gender, number and case:
+
+```sh
+Kalt → kalter, kaltem, kaltes, kalte, kalten 
+```
+One surface form might map to more than one distinct lexical forms:
+
+```sh
+roter → rot(red) ADJ, base, nogender, gen, plural, strong
+              rot ADJ, base, fem, dat/gen, singular, strong
+              rot ADJ, base, masc, nom, sing, strong
+              rot ADJ, comparative
+```
+
+Circumfixing is used in making regular past participles: e.g. `gespielt(played) → ge+spielen(play)+t` . Prefixes, suffixes and circumfixes all occur in German language, different from English, one needs to compose more FSTs.
+In my own implementations, I usually focus on derivations that involves nouns, adjectives and verbs. Most of the sentence level information “who, when, how”, as well as sentence tense is contained in these three classes. Verbs admit special attention from my morphological processor unit designs to understand the “action” of the sentence better. For instance, “angerufen” is a frequent verb from customer service corpora:
+
+
