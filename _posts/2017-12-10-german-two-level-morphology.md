@@ -41,7 +41,7 @@ The list of context rules is not very long either:
 
 * Epenthesis: ch, sh, s, x, z, y/i before s; otherwise lexical + corresponds to 0  
 e.g: boxes, churches, spies (+.e)  
-&nbsp;	dogs, girls, boys      (+.0)  
+&nbsp; &nbsp; &nbsp; dogs, girls, boys      (+.0)  
 * Y-replacement: allies, tried, tries
 * Gemination: capped, bigger, referred
 * Ellision: larger, moving, moved, agreed
