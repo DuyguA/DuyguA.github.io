@@ -24,7 +24,7 @@ girls  ↔ girl<+N><Plu>            gegangen → gehen<+V><PPast>
 walked ↔ walk<+V><Past>                      gegangen<+ADJ><Pos>
 ```
 
-Computationally, 2-level morphology processing consists of language specific components, the lexicon and the context rules and finite state transducers. Environment of the rules are also specified as a string of two-level correspondences e.g.  `i/y <=> __ e/0 + /0 i`. Rules constrain lexical/surface correspondences and the environment in which correspondence is allowed, prohibited or required. Several lexicons, usually by grammatical category and regularity/irregularity makes up the dictionary component. FST provides processing rules in parallel, as well as offering memory and time efficient solutions.   
+Computationally, 2-level morphology processing consists of language specific components, the lexicon, the context rules and finite state transducers. Environment of the rules are also specified as a string of two-level correspondences e.g.  `i/y <=> __ e/0 + /0 i`. Rules constrain lexical/surface correspondences and the environment in which correspondence is allowed, prohibited or required. Several lexicons, usually by grammatical category and regularity/irregularity makes up the dictionary component. FST provides processing rules in parallel, as well as offering memory and time efficient solutions.   
 Before German, let’s see his morphologically not-so-interesting cousin English, also comes from West-Germanic family. English morphology is quite minimalistic, here are the inflectional suffixes: 
 
 | Grammatical Class |Suffix                                                                    |
@@ -41,7 +41,7 @@ The list of context rules is not very long either:
 
 * Epenthesis: ch, sh, s, x, z, y/i before s; otherwise lexical + corresponds to 0  
 e.g: boxes, churches, spies (+.e)  
-     dogs, girls, boys      (+.0)  
+&nbsp;	dogs, girls, boys      (+.0)  
 * Y-replacement: allies, tried, tries
 * Gemination: capped, bigger, referred
 * Ellision: larger, moving, moved, agreed
