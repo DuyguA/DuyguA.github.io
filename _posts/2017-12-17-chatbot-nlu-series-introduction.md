@@ -5,6 +5,7 @@ date: 2017-12-17 09:00:00
 categories: [blog]
 tags: [chatbot nlu, german nlp, turkish nlp]
 comments: false
+preview_pic: /assets/images/onti1.png
 ---
 
 # Chatbot NLU, Introduction
