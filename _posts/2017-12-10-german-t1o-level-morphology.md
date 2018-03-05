@@ -75,7 +75,7 @@ Circumfixing is used in making regular past participles: e.g. `gespielt(played) 
 In my own implementations, I usually focus on derivations that involves nouns, adjectives and verbs. Most of the sentence level information “who, when, how”, as well as sentence tense is contained in these three classes. Verbs admit special attention from my morphological processor unit designs to understand the “action” of the sentence better. For instance, “angerufen” (have phoned) is a frequent verb from customer service corpora:
 
 <figure>
-  <img class="fullw" src="/assets/images/german-morph.png" alt="german-morph.png">
+  <img class="halfw" src="/assets/images/german-morph.png" alt="german-morph.png">
 </figure>
 
 
@@ -89,7 +89,28 @@ In conclusion, inflectional and derivational morphology processing unit involves
 
 ### Compositional Morphology
 
-Productivity of the German language indeed comes from composing words to form new words, **Mammutwörter**. This process can occur with nouns, adjectives, adverbs, verbs but most productive in the case of the nouns. Compound words are richness of Germanic languages, as well as trouble of statistical machine translation and source of %90 of the **OOV**s.
+Productivity of the German language indeed comes from composing words to form new words, **Mammutwörter**. This process can occur with the nouns, adjectives, adverbs, verbs but the most productive in the case of the nouns. Compound words are richness of the Germanic languages, at the same time trouble of statistical machine translation, ASR, text classification... and source of %90 of the **OOV**s.
+
+Most compounds are made from a *head* (**Grundwort or Determinatum**) and *modifier/qualifier words* (**Determinons or Bestimmungswort**). Compound grammatical gender and grammatical category is determined by the head, declension is determined only upto the head as well. Noun-noun (**die Zeitungsindustrie**), adjective-noun (**die Großeltern**), preposition-noun(**der Vorort**), preposition-verb (**runterspringen**), adjective-adjective (**dunkelblau**) are common ways of composing.
+
+Decomposing compound words is not a trivial task, not always words come together as they are, but are often subject to morphological events. In most cases, the modifier stays uninflected e.g. **Schlafzimmer**; in some cases different word from appear e.g. **Bilderbuch, Kirchturm, Landbau, Landsmann, Landesmuseum, Ländercode, Tageskarte, Tagereise**. Though elements `-e(s), -er, -e, -en` look like inflectional endings (and historically is), they are **Fugenelemente**, linking morphemes and admits no meaning. For instance *Fugen-s* occurs `-tum, -ling, -ion, -heit, -keit, -schaft, -sicht, -ung` ending words e.g. **Altertumsforschung, Kommunionsfest, Ansichtskarte**. Genitive/plural elements occur in some morphemes e.g. **Urlaubsort, Wörterbuch** though, but we processed them as **Fugenlement** as well.
+
+According to my own statistics:) about 2/3 of the compounds occur without **Fugenelemente**, I estimate `-(e)s and -(e)n` to occur 20-25 per cent, while `-e` is much rare, I would say 2 per cent. About 92 per cent of the compounds consist of two words, rest is 3 word compounds and 4 word compounds occurs almost none. Here’s are two frequent compounds from our corpus, one being a verb, the other a noun:
+```sh
+weitergeleitet → weiter<#>leiten V,Ppast
+Weiterleitung → weiter<#>leit+ung   N, nom/acc/dat/gen, singular
+```sh
+Decomposing compound words with FST is possible, jumping from end of a word to beginning of another word should emit a word boundary symbol, **<#>**. However, we shouldn’t forget to compose with the *Fugenelement FST* and *Umlautung FST*. This way, one can transduce all possible splittings of a compound, which splits are feasible or “make sense” is whole another issue. My in-house tool generates all possible splits, then filtered by impossible POS tag combinations (e.g. beiden is not bei<#>den) and a language model. For instance “Rohrohrzucker” has 2 possible splits:
+```sh
+Rohr<#>ohr<#>zucker     pipe ear sugar
+Roh<#>rohr<#>zucker     raw cane sugar
+```
+We eliminate the first form because “it doesn’t make sense”, i.e. it admits a very low probability from the language model. Also, we use the heuristic that “less split is better than more splits”. If a compound admits a 2 word split and a 3 word split, we prefer the former.  
+As seen, processing German morphology is challenging but interesting and sophisticated. I usually have mixed feelings, sometimes find it too diffilcult, sometimes enjoy the level of sophistication.
+
+Happy reading and processing!
+
+
 
 
 
