@@ -46,7 +46,7 @@ e.g: boxes, churches, spies (+.e)
 * Gemination: capped, bigger, referred
 * Ellision: larger, moving, moved, agreed
 * I-replacement: dying, lying
-- K-insertion: panicked
+* K-insertion: panicked
 
 That's it, really it. You can express English inflectional morphology with only 9 FSTs.  
 German morphology is mainly concatenative. Inflection, derivation and composition are done via concatenation. Inflections occur as adjective, noun declensions and verb conjugations. For example,
