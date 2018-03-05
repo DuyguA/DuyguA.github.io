@@ -85,7 +85,7 @@ Nouns are not very difficult to recognize due to capitalization, `essen – Esse
 While implementing  German 2-level morphology, I treat non-concatenative events as context dependent rules. For instance, some irregular nouns go through **Umlautung** on number inflection: `Haus → Häuser`. New word forms follow from the irregular form by regular inflection: `Häusern → Haus N, neut, acc/gen/nom,plural`. Here, rather than having one FST both changes the stem vowel and adds `er`, we can compose two FSTs, one context dependently modifies stem vowel in some nouns and other deals with number inflection. Same for processing the second word form, the *case inflection FST* processes the word ending and the *Umlautung FST* modifies the stem vowel.  
 
 Adjective and noun declensions are described by suffixes in general, however irregular declensions occur frequently. For instance many foreign nouns have irregular plurals, e.g. `der Modus-des Modus-die Modi`, as well as ordinary adjectives `gut-besser-am besten`. Here, we separate irregular forms and stems into different sorts of lexicons.  
-In conclusion, inflectional and derivational morphology processing unit involves regular and irregular word lexicons as FSTs, prefix-suffix-circumfix FSTs and nonconcatenative event FSTs to cope with stem changes. 
+In conclusion, inflectional and derivational morphology processing unit involves regular and irregular word lexicons as FSTs, prefix-suffix-circumfix FSTs and nonconcatenative event FSTs to cope with stem changes.
 
 ### Compositional Morphology
 
@@ -98,14 +98,14 @@ Decomposing compound words is not a trivial task, not always words come together
 According to my own statistics:) about 2/3 of the compounds occur without **Fugenelemente**, I estimate `-(e)s and -(e)n` to occur 20-25 per cent, while `-e` is much rare, I would say 2 per cent. About 92 per cent of the compounds consist of two words, rest is 3 word compounds and 4 word compounds occurs almost none. Here are two frequent compounds from business e-mailing, one being a verb, the other a noun:
 
 ```sh
-weitergeleitet →  weiter<#\>leiten     V,PPast
-Weiterleitung  →  weiter<#\>leit+ung   N,nom/acc/dat/gen,singular
+weitergeleitet →  weiter<\#>leiten     V,PPast
+Weiterleitung  →  weiter<\#>leit+ung   N,nom/acc/dat/gen,singular
 ```
-Decomposing compound words with FST is possible, jumping from the end of a word to the beginning of another word should emit a word boundary symbol, **<#>**. However, we shouldn’t forget to compose with the *Fugenelement FST* and *Umlautung FST*. This way, one can transduce all possible splittings of a compound, which splits are feasible or “make sense” is whole another issue. My in-house tool generates all possible splits, then filtered by impossible POS tag combinations (e.g. beiden is not bei<#>den) and a language model. For instance “Rohrohrzucker” has 2 possible splits:
+Decomposing compound words with FST is possible, jumping from the end of a word to the beginning of another word should emit a word boundary symbol, **<#>**. However, we shouldn’t forget to compose with the *Fugenelement FST* and *Umlautung FST*. This way, one can transduce all possible splittings of a compound, which splits are feasible or “make sense” is whole another issue. My in-house tool generates all possible splits, then filtered by impossible POS tag combinations (e.g. beiden is not bei<\#>den) and a language model. For instance “Rohrohrzucker” has 2 possible splits:
 
 ```sh
-Rohr<#>ohr<#>zucker     pipe ear sugar
-Roh<#>rohr<#>zucker     raw cane sugar
+Rohr<\#>ohr<\#>zucker     pipe ear sugar
+Roh<\#>rohr<\#>zucker     raw cane sugar
 ```
 
 We eliminate the first form because “it doesn’t make sense”, i.e. it admits a very low probability from the language model. Also, we use the heuristic that “less split is better than more splits”. If a compound admits a 2 word split and a 3 word split, we prefer the former.  
