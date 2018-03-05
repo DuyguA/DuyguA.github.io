@@ -10,7 +10,7 @@ preview_pic: /assets/images/german-morph.png
 
 # German 2-Level Morphology
 
-2-level morphology is commonly being used for morphological analysis of morphologically complex languages since 1980s. Given surface form, one aims to find the lexical form(s) (possibly more than one, as we’ll see soon) and vice versa, switch between the surface form and the lexical form hence the morphological analysis easily. FSTs are used to map a regular language(surface language) to another regular language(lexical language). The lexical and surface levels are connected via several FSTs.
+2-level morphology is commonly being used for morphological analysis of morphologically complex languages since 1980s. Given surface form, one aims to find the lexical form(s) (possibly more than one, as we’ll see soon) and vice versa, switch between the surface form and the lexical form; hence the morphological analysis easily. FSTs are used to map a regular language (the surface language) to another regular language (the lexical language). The lexical and surface levels are connected via several FSTs.
 
 ```sh
 Lexical form:  s p y + 0 s	g e h en+  s t
@@ -37,7 +37,7 @@ Before German, let’s see his morphologically not-so-interesting cousin English
 |                   |               -es superlative                                            |
 
 
-List of context rules is not very long either:
+The list of context rules is not very long either:
 
 * Epenthesis: ch, sh, s, x, z, y/i before s; otherwise lexical + corresponds to 0  
 e.g: boxes, churches, spies (+.e)  
@@ -48,13 +48,13 @@ e.g: boxes, churches, spies (+.e)
 * I-replacement: dying, lying
 - K-insertion: panicked
 
-That's it, really it. You can express English inflectional morphology with 9 FSTs.  
-German morphology is mainly concatenative. Inflection, derivation and composition are done via concatenation. Infelctions occur as adjective, noun declensions and verb conjugations. For example,
-Nominal number inflection:
+That's it, really it. You can express English inflectional morphology with only 9 FSTs.  
+German morphology is mainly concatenative. Inflection, derivation and composition are done via concatenation. Inflections occur as adjective, noun declensions and verb conjugations. For example,
+The nominal number inflection:
 
 ```sh
-Freund → Freund(friend)  N, masc, acc/nom/dat, singular
-Freunde → Freund(friends) N, masc, acc/gen/nom, plural
+Freund  →  Freund(friend)  N, masc, acc/nom/dat, singular
+Freunde →  Freund(friends) N, masc, acc/gen/nom, plural
 ``` 
 
 Adjectives and nouns are inflected upto gender, number and case:
@@ -62,24 +62,25 @@ Adjectives and nouns are inflected upto gender, number and case:
 ```sh
 Kalt → kalter, kaltem, kaltes, kalte, kalten 
 ```
+
 One surface form might map to more than one distinct lexical forms:
 
 ```sh
-roter → rot(red) ADJ, base, nogender, gen, plural, strong
-              rot ADJ, base, fem, dat/gen, singular, strong
-              rot ADJ, base, masc, nom, sing, strong
-              rot ADJ, comparative
+roter →  rot(red) ADJ, base, nogender, gen, plural, strong
+         rot ADJ, base, fem, dat/gen, singular, strong
+         rot ADJ, base, masc, nom, sing, strong
+         rot ADJ, comparative
 ```
 
-Circumfixing is used in making regular past participles: e.g. `gespielt(played) → ge+spielen(play)+t` . Prefixes, suffixes and circumfixes all occur in German language, different from English, one needs to compose more FSTs.
-In my own implementations, I usually focus on derivations that involves nouns, adjectives and verbs. Most of the sentence level information “who, when, how”, as well as sentence tense is contained in these three classes. Verbs admit special attention from my morphological processor unit designs to understand the “action” of the sentence better. For instance, “angerufen” (have phoned) is a frequent verb from customer service corpora:
+Circumfixing is used in making regular past participles: e.g. `gespielt(played) → ge+spielen(play)+t`. Prefixes, suffixes and circumfixes all occur in German language, different from English; consequently one needs to compose more FSTs.  
+In my own implementations, I usually focus on derivations that involve nouns, adjectives and verbs. Most of the sentence level information “who, when, how”, as well as the sentence tense is captured by these three classes. Verbs admit special attention from my morphological processor unit designs to understand the “action” of the sentence better. For instance, “angerufen” (have phoned) is a frequent verb from many customer service corpora:
 
 <figure>
-  <img class="halfw" src="/assets/images/german-morph.png" alt="german-morph.png">
+  <img class="tqw" src="/assets/images/german-morph.png" alt="german-morph.png">
 </figure>
 
 
-Nouns are not very difficult to recognize due to capitalization, `essen – Essen (to eat – food)`. Verbs admit  three typical suffixes `-en, -eln, -ern`, adjectivization is similar for instance `Tag – täglich (day – daily)`. Here, derivation might cause stem vowel changes as Umlaut and Ablaut shifts.
+Nouns are not very difficult to recognize due to capitalization, `essen – Essen (to eat – food)`. Verbs admit  three typical suffixes `-en, -eln, -ern`, adjectivization is similar for instance `Tag – täglich (day – daily)`. Here, derivation might cause stem vowel changes as **Umlaut** and **Ablaut** shifts.
 
 While implementing  German 2-level morphology, I treat non-concatenative events as context dependent rules. For instance, some irregular nouns go through Umlautung on number inflection: `Haus → Häuser`. New word forms follow from the irregular form by regular inflection: `Häusern → Haus N, neut, acc/gen/nom,plural`. Here, rather than having one FST both changes the stem vowel and adds “er”, we can compose two FSTs, one context dependently modifies stem vowel in some nouns and other deals with number inflection. Same for processing the second word form, case inflection FST processes the word ending and Umlautung FST modifies the stem vowel.  
 
