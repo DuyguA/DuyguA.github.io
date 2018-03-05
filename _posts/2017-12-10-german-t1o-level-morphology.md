@@ -103,7 +103,7 @@ Weiterleitung  →  weiter<#>leit+ung   N,nom/acc/dat/gen,singular
 ```
 Decomposing compound words with FST is possible, jumping from the end of a word to the beginning of another word should emit a word boundary symbol, **<#>**. However, we shouldn’t forget to compose with the *Fugenelement FST* and *Umlautung FST*. This way, one can transduce all possible splittings of a compound, which splits are feasible or “make sense” is whole another issue. My in-house tool generates all possible splits, then filtered by impossible POS tag combinations (e.g. beiden is not bei<\#>den) and a language model. For instance “Rohrohrzucker” has 2 possible splits:
 
-```sh
+```
 Rohr<#>ohr<#>zucker     pipe ear sugar
 Roh<#>rohr<#>zucker     raw cane sugar
 ```
