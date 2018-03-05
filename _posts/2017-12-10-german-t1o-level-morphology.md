@@ -25,19 +25,9 @@ Before German, let’s see his morphologically not-so-interesting cousin English
 
 | Grammatical Class | Suffix                                                                   |
 |-------------------|--------------------------------------------------------------------------|
-| Noun              | -s  plural -'s possessive                                                |
-| Verb              | -ed  past tense -s    3rd singular person present tense -ing progressive |
-| Adjective         | -er comparative -es superlative                                          |
-
-\begin{table}[]
-\centering
-\caption{My caption}
-\label{my-label}
-\begin{tabular}{|l|l|}
-\hline
-Grammatical Class & Suffix                                                                                                               \\ \hline
-Noun              & \begin{tabular}[c]{@{}l@{}}-s  plural\\ -'s possessive\end{tabular}                                                  \\ \hline
-Verb              & \begin{tabular}[c]{@{}l@{}}-ed  past tense\\ -s    3rd singular person present tense\\ -ing progressive\end{tabular} \\ \hline
-Adjective         & \begin{tabular}[c]{@{}l@{}}-er comparative\\ -es superlative\end{tabular}                                            \\ \hline
-\end{tabular}
-\end{table}
+| Noun              | -s  plural                                                               |
+|                   |-'s  possessive                                                           |
+| Verb              | -ed  past tense                                                          |
+|                   | -s   3rd singular person present tense -ing progressive                  |
+| Adjective         | -er comparative                                                          |
+|                    | -es superlative                                                          |
