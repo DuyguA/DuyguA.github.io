@@ -37,7 +37,7 @@ Past <= Ich habe(haben sing,1per) schon angerufen(anrufen V,PPast).
 Future <= Ich werde(werden sing,1per) anrufen(anrufen V,inf).
 ```
 
-For the first sentence, we locate the auxiliary verb "haben" together with  past participle verb and immediately deduce that the sentence tense is past. The second sentence contains the future auxiliary "werden" together with an infinitive verb, hence the sentence tense is future (most probably an apoointment request in this case).
+For the first sentence, we locate the auxiliary verb "haben" together with  past participle verb and immediately deduce that the sentence tense is past. The second sentence contains the future auxiliary "werden" together with an infinitive verb, hence the sentence tense is future (most probably an appointment request in this case).
 
 <figure>
   <img class="fullw" src="/assets/images/ontilovesdemorphy.jpg" alt="ontilovesdmeorphy.jpg">
