@@ -49,8 +49,13 @@ Here, these two sentences has more or less the same wording. Without any time ad
 
 Most probably your chatbot would like to respond to customers in their own tone i.e. "Sie" or "du". Until the customer offers "du" first, the chatbot is better to be formal and conversate in "Sie". However, after the customer switches to "du", the chatbot should also go informal.
 
-PICCCCCCCCC#
+```
+U: Sende(senden 2ndper,sing,imp) mir die Unterlagen.
+B: Kannst(können 2ndper,sing,aux) du(2ndper,sing) mir deine(2ndper,sing) Kundennummer mitteilen?
 
+U: Können Sie mir hilfen?
+B: Können(können inf,aux) Sie(2ndper,plu) mir Ihrer(2ndper,plu) Kundennummer mitteilen?
+```
 
 ### Language Modelling and Semantic Similarity
 
@@ -72,4 +77,4 @@ More techincal highlights are as follows:
 * Lemmatizing improves keyword ranking dramatically. We'll discover this issue in detail, wait for the oncoming semantic search post :)
 
 
-Happy lemmatizing and hacking. We will get to know DEMorphy better in oncoming Chatbot NLU posts.
+Happy lemmatizing and hacking! We will get to know DEMorphy better in oncoming Chatbot NLU posts.
