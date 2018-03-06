@@ -57,7 +57,7 @@ U: Können Sie mir hilfen?
 B: Können(können inf,aux) Sie(2ndper,plu) mir Ihrer(2ndper,plu) Kundennummer mitteilen?
 ```
 
-It might look like a minor detail, but believe me or not it is a big deal in German speaking countries. It is indeed a minor detail compared to the statistical and linguistics tasks; however your  chatbot would still like to keep their customers happy. As chatbot designers, we aim global happiness.
+It might look like a minor detail, but believe me or not it is a big deal in German speaking countries. It is indeed a minor detail compared to the statistical and linguistic tasks; however your  chatbot would still like to keep their customers happy. As chatbot designers, we aim global happiness.
 
 ### Language Modelling and Semantic Similarity
 
