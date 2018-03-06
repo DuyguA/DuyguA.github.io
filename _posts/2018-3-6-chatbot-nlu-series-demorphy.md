@@ -61,7 +61,7 @@ B: Können(können inf,aux) Sie(2ndper,plu) mir Ihrer(2ndper,plu) Kundennummer m
 
 ```
 Bitte rufen Sie uns morgen an.
-Bitte rufts du uns morgen an.
+Bitte rufst du uns morgen an.
 ```
 
 Here, these two sentences are identical except the tone; hence they should admit the semantic distance `0`. Two sentences collide after lemmatizing with DEMorphy:
