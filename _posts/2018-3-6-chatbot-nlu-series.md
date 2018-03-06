@@ -38,6 +38,7 @@ Future <= Ich werde[werden sing,1per] anrufen[anrufen V,Inf].
 ```
 
 For the first sentence, we locate the auxiliary verb "haben" together with  past participle verb and immediately deduce that the sentence tense is past. The second sentence contains the future auxiliary "werden" together with an infinitive verb, hence the sentence tense is future (most probably an appointment request in this case). Both sentences has their own importance and requires immediate action, the former includes an angry customer emergency!; the latter is also of high priority.
+Here, these two sentences has more or less the same wording. Without any time adverbs, sentiment and intent classifiers can put these sentences into the same category mistakenly. Human language is never a bag of words, chatbot NLU will never be a easy task for this reason. One needs to include both statistical components and linguistic features to their chatbot NLU pipeline. DEMorphy helps chatbots to syntactically parse the German language and make all the users happy.
 
 <figure>
   <img class="fullw" src="/assets/images/ontilovesdemorphy.jpg" alt="ontilovesdmeorphy.jpg">
