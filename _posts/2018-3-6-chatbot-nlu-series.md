@@ -5,12 +5,14 @@ date: 2018-03-06 09:00:00
 categories: [blog]
 tags: [chatbot nlu, chatbot, german nlp]
 comments: false
+preview_pic: /assets/images/onti1.jpg
 ---
 
 # Understanding German Word Forms: DEMorphy
 
 When it comes to processing the German language, it's unavoidable to consider rich morphology. Same noun, adjective or verb may appear in many different forms upto the gender, number, person... For instance, all "rufen", "rufe", "rufst" is "to phone"; same verb in different forms. Hence if one wants to understand German text, it's compulsory to recognize the word forms.  
-DEMorphy is a German word form analyzer with more than 10M word forms. DEMorphy can assist chatbots, e-mail analyzers, statistical MT, ASR... all sorts of machine learning system that assigns "meaning" to German text. Let's see DEMorphy on action:
+DEMorphy is a German word form analyzer with more than 10M word forms. DEMorphy can assist chatbots, e-mail analyzers, statistical MT, ASR... all sorts of machine learning system that assigns "meaning" to German text.  
+Let's see DEMorphy on action:
 
 ### Analyzing Sentence Tense
 For chatbots, it's crucial to "understand" customer *already did/wants to do* which action. For instance, compare the two sentences
@@ -23,7 +25,10 @@ Ich werde dich anrufen (I'll phone you).
 In the former, the customer already phoned but their problem is still not yet, possibly an angry customer! In the latter, the customer maybe wants to schedule a call tomorrow...meanings are *completely different* in customer care concept.
 
 
-PICCCCCCCCCCC HEREEEEEEEEEEE
+<figure>
+  <img class="halfw" src="/assets/images/onticonfused.jpg" alt="onticonfused.jpg">
+</figure>
+
 
 Here DEMorphy comes to help:
 
