@@ -5,7 +5,7 @@ date: 2018-03-06 09:00:00
 categories: [blog]
 tags: [chatbot nlu, chatbot, german nlp]
 comments: false
-preview_pic: /assets/images/onti1.jpg
+preview_pic: /assets/images/onticonfused.jpg
 ---
 
 # Understanding German Word Forms: DEMorphy
@@ -26,7 +26,7 @@ In the former, the customer already phoned but their problem is still not yet, p
 
 
 <figure>
-  <img class="halfw" src="/assets/images/onticonfused.jpg" alt="onticonfused.jpg">
+  <img class="fullw" src="/assets/images/onticonfused.jpg" alt="onticonfused.jpg">
 </figure>
 
 
@@ -36,6 +36,12 @@ Here DEMorphy comes to help:
 Past <= Ich habe(haben sing,1per) schon angerufen(anrufen V,PPast).
 Future <= Ich werde(werden sing,1per) anrufen(anrufen V,inf).
 ```
+
+For the first sentence, we locate the auxiliary verb "haben" together with  past participle verb and immediately deduce that the sentence tense is past. The second sentence contains the future auxiliary "werden" together with an infinitive verb, hence the sentence tense is future (most probably an apoointment request in this case).
+
+<figure>
+  <img class="fullw" src="/assets/images/ontilovesdemorphy.jpg" alt="ontilovesdmeorphy.jpg">
+</figure>
 
 ### Analyzing Sentence Tone
 
