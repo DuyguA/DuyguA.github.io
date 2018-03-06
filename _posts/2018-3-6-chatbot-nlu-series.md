@@ -33,11 +33,11 @@ In the former, the customer already phoned but their problem is still not yet, p
 Here DEMorphy comes to help:
 
 ```
-Past <= Ich habe(haben sing,1per) schon angerufen(anrufen V,PPast).
-Future <= Ich werde(werden sing,1per) anrufen(anrufen V,inf).
+Past <= Ich habe[haben sing,1per] schon angerufen[anrufen V,PPast].
+Future <= Ich werde[werden sing,1per] anrufen[anrufen V,Inf].
 ```
 
-For the first sentence, we locate the auxiliary verb "haben" together with  past participle verb and immediately deduce that the sentence tense is past. The second sentence contains the future auxiliary "werden" together with an infinitive verb, hence the sentence tense is future (most probably an appointment request in this case).
+For the first sentence, we locate the auxiliary verb "haben" together with  past participle verb and immediately deduce that the sentence tense is past. The second sentence contains the future auxiliary "werden" together with an infinitive verb, hence the sentence tense is future (most probably an appointment request in this case). Both sentences has their own importance and requires immediate action, the former includes an angry customer emergency!; the latter is also of high priority.
 
 <figure>
   <img class="fullw" src="/assets/images/ontilovesdemorphy.jpg" alt="ontilovesdmeorphy.jpg">
@@ -70,4 +70,4 @@ More techincal highlights are as follows:
 * Lemmatizing improves keyword ranking dramatically. We'll discover this issue in detail, wait for the oncoming semantic search post :)
 
 
-Happy hacking and lemmatizing!
+Happy lemmatizing and hacking. We will get to know DEMorphy better in oncoming Chatbot NLU posts.
