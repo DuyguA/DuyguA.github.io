@@ -5,7 +5,6 @@ date: 2018-03-06 09:00:00
 categories: [blog]
 tags: [chatbot nlu, chatbot, german nlp]
 comments: false
-preview_pic: /assets/images/onti1.jpg
 ---
 
 # Understanding German Word Forms: DEMorphy
