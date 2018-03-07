@@ -3,7 +3,7 @@ layout: post
 title: Chatbot NLU Series
 date: 2018-03-06 09:00:00
 categories: [blog]
-tags: [chatbot nlu, chatbot, german nlp]
+tags: [chatbot nlu, german nlp, german lemmatizer, german morphological analyzer]
 comments: false
 preview_pic: /assets/images/onticonfused.jpg
 ---
