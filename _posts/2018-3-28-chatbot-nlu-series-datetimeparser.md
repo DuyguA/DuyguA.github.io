@@ -1,10 +1,10 @@
 ---
 layout: post
 title: Chatbot NLU Series, Part III
-date: 2018-03-05 09:00:00
+date: 2018-03-28 09:00:00
 categories: [blog]
 tags: [chatbot nlu, date-time parser] 
-comments: true
+comments: false
 preview_pic: /assets/images/onticonfused.jpg
 ---
 
