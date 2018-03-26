@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Chatbot NLU Series
+title: Chatbot NLU Series, Part II
 date: 2018-03-06 09:00:00
 categories: [blog]
 tags: [chatbot nlu, german nlp, german lemmatizer, german morphological analyzer]
