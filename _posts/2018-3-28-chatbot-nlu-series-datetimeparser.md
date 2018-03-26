@@ -50,7 +50,7 @@ We can add time of the day to the above. Notice that *Morgen* can be either *tom
 ```
 Mittwoch vormittag	Wednesday afternoon
 Heute nachmittag	today afternoon
-gestern morgen		Yesterday morning
+gestern morgen		yesterday morning
 Do nachmittag		Thursday afternoon
 morgen nachmittag       tomorrow afternoon
 Freitag ganzer Tag	Friday all day
@@ -59,7 +59,7 @@ Freitag ganzer Tag	Friday all day
 or we can qualify the day expression. Don't forget to relax umlauts by non-umlaut equivalents.
 
 ```
-Kommenden Mittwoch 	        Coming Wednesday
+Kommenden Mittwoch 	        coming Wednesday
 n[äa]chster Woche Montag	next week Monday
 ```
 
@@ -73,5 +73,38 @@ Donnerstag oder Freitag vormittags      Thursday or Friday morning
 nachste Woche Dienstagnachmittag oder Mittwochnachmittag   next week Tuesday afternoon or Wednesday afternoon
 ```
 
+Let's turn these strings into context free production rules:
 
+```
+S -> precise_date
+precise_date -> weekday_or_expr | weekday_t | weekday
+weekday_or_expr -> weekday_t_or_weekday_t | weekday_or_weekday
 
+weekday_or_weekday -> weekday OR weekday (TIME_OF_DAY)?
+weekday_t_or_weekday_t -> weekday_t OR weekday_t
+
+weekday_t -> weekday time_of_day 
+weekday -> NEXT DAY | DAY | DAY_ABBR
+time_of_day -> TIME_OF_DAY
+
+DAY ->  Montag | Dienstag | Mittwoch | Donnerstag | Freitag | Samstag | Sonntag
+DAY_ABBR -> Mo | Di | Mi | Do | Fri
+NEXT -> [Nn][aä]chste[rns]? | [Kk]ommende[rn]?
+OR -> oder
+TIME_OF_DAY -> (vor|nach)?mittag | morgen | ganzer tag
+```
+
+Notice the ambiguity even at this level. Ambiguity is caused by strings of the form *Freitag oder Donnerstag nachmittag*, current grammar parse them to `weekday OR weekday (TIME_OF_DAY)?`, which leads to the following parse tree: 
+PICCCCCCCCCCCCCCCCCCCC
+Notice that one could do the short cut 
+
+```
+precise_date -> weekday_or_expr | weekday_t
+weekday_or_expr -> weekday_t OR weekday_t
+weekday_t -> weekday time_of_day | weekday
+```
+
+then, *Freitag oder Donnerstag nachmittag* ends up with the following parse tree:
+
+PICCCCCCCCCCCCCCCCCC
+which is not what you want most probably. The string belongs to the language in both cases, however semantics are very different. If one string can end up in several parse trees, always ask yourself: 'How should be the evaluation/semantics?' While designing the grammar, keep the semantics in your head as well.
