@@ -5,7 +5,7 @@ date: 2018-03-28 09:00:00
 categories: [blog]
 tags: [chatbot nlu, date-time parser] 
 comments: false
-preview_pic: /assets/images/day_with_time.png
+preview_pic: /assets/images/zwischen.png
 ---
 
 # Chatbot NLU Part III: Date-Time Parser
