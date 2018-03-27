@@ -5,7 +5,7 @@ date: 2018-03-28 09:00:00
 categories: [blog]
 tags: [chatbot nlu, date-time parser] 
 comments: false
-preview_pic: /assets/images/onticonfused.jpg
+preview_pic: /assets/images/day_with_time.png
 ---
 
 # Chatbot NLU Part III: Date-Time Parser
@@ -51,14 +51,14 @@ morgen nachmittag       tomorrow afternoon
 Freitag ganzer Tag	Friday all day
 ```
 
-or we can qualify the day expression. Don't forget to relax umlauts by non-umlaut equivalents.
+or we can qualify the day expression. Don't forget to relax umlauts by non-umlaut equivalents. 
 
 ```
 Kommenden Mittwoch 	        coming Wednesday
 n[äa]chster Woche Montag	next week Monday
 ```
 
-OK, customer might also say *this day or that day*. *I'm available Wednesday or Friday afternoon*  style patterns frequently occur in customer text. 
+OK, customer might also say *this day or that day*. *I'm available Wednesday or Friday afternoon* style patterns frequently occur in customer text. I'll also discard whitespaces while compiling the grammar, time of the day words can be written together and frequently they are written together. Also **Uhr**, **h**, **-**, **/** etc. particles are often written next to numbers with or without spaces. It's a good idea to discard spaces in date-time parsing in general, independent of the language. 
 
 ```
 Mi or Do.                               Wednesday or Thursday
@@ -83,7 +83,7 @@ time_of_day → TIME_OF_DAY
 
 DAY →  "Montag" | "Dienstag" | "Mittwoch" | "Donnerstag" | "Freitag" | morgen | heute
 DAY_ABBR → "Mo" | "Di" | "Mi" | "Do" | "Fri"
-NEXT → [Nn][aä]chste[rns]? | [Kk]ommende[rn]?
+NEXT → \[Nn\][aä]chste[rns]? | [Kk]ommende[rn]?
 OR → "oder"
 TIME_OF_DAY → (vor|nach)?mittag | morgen | ganzer tag
 ```
@@ -109,12 +109,13 @@ then, *Freitag oder Donnerstag nachmittag* ends up with the following parse tree
 </figure>
 
 
-which is not what you want most probably. The string belongs to the language in both cases, however semantics are very different. In the first tree, the two weekdays and the time_of_the_day are at the same level. One can attach time_of_the_day to the both days if you traverse from the **weekday_or_weekday** node. In the latter, time_of_the_day node is sibling to only one weekday node, which happens to be Thursday.
+which is not what you want most probably. The string belongs to the language in both cases, however semantics are very different. In the first tree, the two weekdays and the time_of_the_day are at the same level. One can attach time_of_the_day to the both days if you traverse from the **weekday_or_weekday** node. In the latter, time_of_the_day node is sibling to only one weekday node, which happens to be Thursday.  
 If one string can end up in several parse trees, always ask yourself: 'How should be the precedence/evaluation/semantics?' While designing the grammar, keep the semantics in your head as well. While designing any parser, *you* are the king of the semantics universe. The grammars carry semantics that *you* charge, the generated parse trees are structured the way *you* want.
 OK, let's add the time strings as well. The time string business is a bit tricky, because numbers in general can be many different things, not only part of date strings. What I mean is that:
 
 ```
 10 Uhr
+10:30Uhr
 10:30
 10 am
 zwischen 11 und 12 Uhr 
@@ -131,8 +132,7 @@ are %100 time strings, no matter how and where they occur whereas this *11*:
 morgen ab 11        tomorrow beginning from 11
 ```
 
-or even *ab 11* can alone without more qualifiers, mean many things other than a time without the *tomorrow*, which makes this expression a date-time string.  
-Let's first make a list of easy strings, then generate them:
+or even *ab 11* can alone without more qualifiers, mean many things other than a time without the *tomorrow*, which makes this expression a date-time string. For the sake of clarity, I'll skip these sort because one needs to interleave days and numbers. Here's a basic grammar for time strings, I parsed an example expression as well.
 
 ```
 time_expr →  time_or_time | qualified_times | uhr_time
@@ -149,7 +149,7 @@ TWO_DIGIT_NUM → \b[012]\d
 DEF_HOUR → \b[012]?\d:[012345]\d?
 
 UHR → "Uhr" | "h"
-BETWEEN → "zwischen" | "Zw."
+BETWEEN → "zwischen" | "zw."
 AND → "und"
 AT → "um"
 ZUM → "zum"
@@ -163,6 +163,10 @@ MAX → "max." | "max"
 CIRCA → "ca." | "ca"
 ```
 
+<figure>
+  <img class="fullw" src="/assets/images/zwischen.png" alt="zwischen.png">
+</figure>
+
 We're ready to complete the grammar combining date and time:
 
 ```
@@ -170,4 +174,14 @@ S →  precise_date_time
 precise_date_time →  precise_date time_expr | precise_date | time_expr
 ```
 
-I'll put together a Lark grammar
+I'll put together a Lark grammar, combining dates and times:
+
+```python
+lallsasa
+```
+
+and parse the string `Kommenden Montag, vom 16 bis 17Uhr oder zwischen 18-19Uhr`.
+
+<figure>
+  <img class="fullw" src="/assets/images/day_with_time.png" alt="day_with_time.png">
+</figure>
