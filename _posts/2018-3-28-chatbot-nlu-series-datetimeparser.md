@@ -20,20 +20,14 @@ Let's schedule a Skype call. I'm free on 26th March, Monday 14.00pm or 12.00pm. 
 ```
 
 In sales context, dates can vary from very near future (*today afternoon*) to indeed very far away future (*in 6 months*). In this post, we'll process precise dates as an example; longer term dates can be parsed similarly.
-
 We will recognize  and parse formal language of date-stime strings with Context Free Grammars. I like to use [Lark](https://github.com/erezsh/lark) for mainly efficiency reasons, availability of several parsing algorithms and full Unicode support. Another very important issue is Lark can handle ambiguity, as we'll see very soon date-time grammars can get quite ambiguous. PyParsing is also great, but Lark is much lighter and faster. We'll visit performance issues later; first we focus on forming the grammars.
-
 We'll parse German date-time expression for an example. As you will see from the design
-
 * Non-numeric nonterminals are language dependent i.e. date-time words morgen/morning, gestern/yesterday...
 * Ways of writing date time expressions are different in these two languages. In my observation USA English contains more patterns with timezone info i.e. PST, PDT, GMT etc. My feeling is that, timezones add more ambiguity to USA English data-time grammars.
-
 Enough speaking, let's see the CFGs on action:
 
 ## Designing the Grammar
-
-We'll build a grammar to recognize the **precise dates**: dates look like appointment dates, near future or near past. For instance *yesterday 11 am*, *yesterday afternoon*, *tomorrow at 8.00Uhr*, *23 March Monday, 12:00*... Far away dates i.e. *after 6 moths*, *in 3rd Quarter*, *beginning of the new year* ... can be processed similarly. Let's make a list of strings that we want to recognize:
-
+We'll build a grammar to recognize the **precise dates**: dates look like appointment dates, near future or near past. For instance *yesterday 11 am*, *yesterday afternoon*, *tomorrow at 8.00Uhr*, *23 March Monday, 12:00*... Far away dates i.e. *after 6 moths*, *in 3rd Quarter*, *beginning of the new year* ... can be processed similarly. Let's make a list of strings that we want to recognize.
 Days, either weekdays or relative days yesterday, tomorrow etc. Let's include abbreviations as well. Abbreviations can end with a period or not.
 
 ```
@@ -70,17 +64,17 @@ OK, customer might also say *this day or that day*. *I'm available Wednesday or 
 Mi or Do.                               Wednesday or Thursday
 heute oder am Do nachmittags            today or Thursday afternoon
 heute nachmittag oder Freitag morgen    today afternoon or Friday morning
-Donnerstag oder Freitag vormittags      Thursday or Friday morning
+Donnerstag oder Freitag vormittags      Thursday or Friday mornings
 nachste Woche Dienstagnachmittag oder Mittwochnachmittag   next week Tuesday afternoon or Wednesday afternoon
 ```
 
-Let's turn these strings into context free production rules:
+We can turn these strings into context free production rules:
 
 ```
 precise_date → weekday_or_expr | weekday_t | weekday
 weekday_or_expr → weekday_t_or_weekday_t | weekday_or_weekday
 
-weekday_or_weekday → weekday OR weekday (TIME_OF_DAY)?
+weekday_or_weekday → weekday OR weekday (time_of_day)?
 weekday_t_or_weekday_t → weekday_t OR weekday_t
 
 weekday_t → weekday time_of_day 
@@ -115,10 +109,8 @@ then, *Freitag oder Donnerstag nachmittag* ends up with the following parse tree
 </figure>
 
 
-which is not what you want most probably. The string belongs to the language in both cases, however semantics are very different. If one string can end up in several parse trees, always ask yourself: 'How should be the precedence/evaluation/semantics?' While designing the grammar, keep the semantics in your head as well.
-
-While designing any parser, *you* are the king of the semantics universe. The grammars carry semantics that *you* charge, the generated parse trees are structured the way *you* want.
-
+which is not what you want most probably. The string belongs to the language in both cases, however semantics are very different. In the first tree, the two weekdays and the time_of_the_day are at the same level. One can attach time_of_the_day to the both days if you traverse from the **weekday_or_weekday** node. In the latter, time_of_the_day node is sibling to only one weekday node, which happens to be Thursday.
+If one string can end up in several parse trees, always ask yourself: 'How should be the precedence/evaluation/semantics?' While designing the grammar, keep the semantics in your head as well. While designing any parser, *you* are the king of the semantics universe. The grammars carry semantics that *you* charge, the generated parse trees are structured the way *you* want.
 OK, let's add the time strings as well. The time string business is a bit tricky, because numbers in general can be many different things, not only part of date strings. What I mean is that:
 
 ```
@@ -133,7 +125,6 @@ zwischen 11 und 12 Uhr oder ab 16Uhr
 vom 16 bis 17Uhr oder ab 18 Uhr
 vom 16 bis 17Uhr oder zwischen 18-19Uhr
 ```
-
 are %100 time strings, no matter how and where they occur whereas this *11*:
 
 ```
