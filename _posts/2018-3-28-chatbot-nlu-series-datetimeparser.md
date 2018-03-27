@@ -95,8 +95,12 @@ TIME_OF_DAY → (vor|nach)?mittag | morgen | ganzer tag
 ```
 
 Notice the ambiguity even at this level. Ambiguity is caused by strings of the form *Freitag oder Donnerstag nachmittag*, current grammar parse them to `weekday OR weekday (TIME_OF_DAY)?`, which leads to the following parse tree: 
-PICCCCCCCCCCCCCCCCCCCC
-Notice that one could do the short cut 
+
+<figure>
+  <img class="halfw" src="/assets/images/weekday_semantics_correct.png" alt="weekday_semantics_correct.png">
+</figure>
+
+One could take the short cut 
 
 ```
 precise_date → weekday_or_expr | weekday_t
@@ -106,7 +110,11 @@ weekday_t → weekday time_of_day | weekday
 
 then, *Freitag oder Donnerstag nachmittag* ends up with the following parse tree:
 
-PICCCCCCCCCCCCCCCCCC
+<figure>
+  <img class="halfw" src="/assets/images/weekday_semantics_undesired.png" alt="weekday_semantics_undesired.png">
+</figure>
+
+
 which is not what you want most probably. The string belongs to the language in both cases, however semantics are very different. If one string can end up in several parse trees, always ask yourself: 'How should be the precedence/evaluation/semantics?' While designing the grammar, keep the semantics in your head as well.
 
 While designing any parser, *you* are the king of the semantics universe. The grammars carry semantics that *you* charge, the generated parse trees are structured the way *you* want.
@@ -171,4 +179,4 @@ S →  precise_date_time
 precise_date_time →  precise_date time_expr | precise_date | time_expr
 ```
 
-Let's parse some strings and see what happens. 
+I'll put together a Lark grammar
