@@ -5,7 +5,7 @@ date: 2018-03-28 09:00:00
 categories: [blog]
 tags: [chatbot nlu, date-time parser] 
 comments: false
-preview_pic: /assets/images/zwischen.png
+preview_pic: /assets/images/weekday_semantics_correct.png
 ---
 
 # Chatbot NLU Part III: Date-Time Parser
@@ -177,7 +177,70 @@ precise_date_time →  precise_date time_expr | precise_date | time_expr
 I'll put together a Lark grammar, combining dates and times:
 
 ```python
-lallsasa
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from lark import Lark
+from lark.tree import pydot__tree_to_png
+
+
+date_grammar = u"""
+   precise_date_time: precise_date (COMMA)? time_expr | precise_date | time_expr
+
+   time_expr: time_or_time | qualified_times | uhr_time
+   time_or_time: qualified_times OR qualified_times
+   qualified_times: (from_uhr_till_uhr | between_uhr | qualified_uhr)
+   from_uhr_till_uhr: FROM (uhr_time|might_be_uhr) UNTIL uhr_time
+   between_uhr: (BETWEEN)? (uhr_time|might_be_uhr) (TILL|AND) uhr_time
+   qualified_uhr:  (TOWARDS|AT|UNTIL|AB|FROM) (CIRCA)? uhr_time
+
+
+   precise_date: weekday_or_expr | weekday_t | weekday
+    
+   weekday_or_expr: weekday_t_or_weekday_t | weekday_or_weekday
+   weekday_or_weekday: weekday OR weekday (time_of_day)?
+   weekday_t_or_weekday_t: weekday_t OR weekday_t
+
+   weekday_t: weekday time_of_day
+   weekday: NEXT DAY | DAY | DAY_ABBR
+   time_of_day: TIME_OF_DAY
+
+   uhr_time: DEF_HOUR UHR | TWO_DIGIT_NUM UHR | DEF_HOUR
+   might_be_uhr: TWO_DIGIT_NUM
+   DEF_HOUR: TWO_DIGIT_NUM ":" TWO_DIGIT_NUM
+   TWO_DIGIT_NUM: DIGIT DIGIT?
+
+   DAY: "Montag" | "Dienstag" | "Mittwoch" | "Donnerstag" | "Freitag" | "morgen" | "heute"
+   DAY_ABBR: "Mo" | "Di" | "Mi" | "Do" | "Fri"
+   NEXT: "Nächster" | "Nächsten" | "Nächste" | "nächster" | "nächsten" | "nächste" | "Kommenden" | "Kommender" | "Kommende" | "kommenden" | "kommender" | "kommende"
+   TIME_OF_DAY: "vormittag" | "nachmittag" | "mittag" | "morgen" | "ganzer tag"
+   COMMA: "," | ";"
+   UHR: "Uhr" | "h"
+   BETWEEN: "zwischen" | "zw."
+   AND: "und"
+   AT: "um"
+   ZUM:"zum"
+   AB: "ab"
+   TOWARDS: "gegen"
+   AMPM: "am" | "pm"
+   TILL: "-"
+   FROM: "von" | "vom"
+   UNTIL: "bis"
+   MAX: "max." | "max"
+   CIRCA: "ca." | "ca"
+   OR: "oder"
+
+   %import common.WS
+   %import common.DIGIT
+
+   %ignore WS
+
+"""
+
+parser = Lark(date_grammar, start="precise_date_time")
+
+text = u"Kommenden Montag, vom 16 bis 17Uhr oder zwischen 18-19Uhr"
+oo = parser.parse(text)
 ```
 
 and parse the string `Kommenden Montag, vom 16 bis 17Uhr oder zwischen 18-19Uhr`.
