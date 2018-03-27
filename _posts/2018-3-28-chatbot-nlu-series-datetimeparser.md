@@ -97,7 +97,7 @@ TIME_OF_DAY → (vor|nach)?mittag | morgen | ganzer tag
 Notice the ambiguity even at this level. Ambiguity is caused by strings of the form *Freitag oder Donnerstag nachmittag*, current grammar parse them to `weekday OR weekday (TIME_OF_DAY)?`, which leads to the following parse tree: 
 
 <figure>
-  <img class="halfw" src="/assets/images/weekday_semantics_correct.png" alt="weekday_semantics_correct.png">
+  <img class="fullw" src="/assets/images/weekday_semantics_correct.png" alt="weekday_semantics_correct.png">
 </figure>
 
 One could take the short cut 
@@ -111,7 +111,7 @@ weekday_t → weekday time_of_day | weekday
 then, *Freitag oder Donnerstag nachmittag* ends up with the following parse tree:
 
 <figure>
-  <img class="halfw" src="/assets/images/weekday_semantics_undesired.png" alt="weekday_semantics_undesired.png">
+  <img class="fullw" src="/assets/images/weekday_semantics_undesired.png" alt="weekday_semantics_undesired.png">
 </figure>
 
 
