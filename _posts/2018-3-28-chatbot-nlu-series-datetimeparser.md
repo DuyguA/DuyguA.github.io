@@ -252,8 +252,7 @@ and parsed the string `Kommenden Montag, vom 16 bis 17Uhr oder zwischen 18-19Uhr
 
 ## More of the Parsing
 
-Earlier, I spoke about the Bible of the compiler writing:), the Dragon book. The Dragon book, or any book contains parsing algorithms, classes of languages that can be parsed with these algorithms and efficiency issues. In this section we'll see **LR**, **SLR** , **LALR** and **Earley** parsers. First we again have a look at bottom-up and top-down parsing.  
-**Top-down parsers** begin with grammar rules and try to reach the input string. Left recursive grammars cannot be parsed by recursive descent style top-down parsers. In general, recursive descent top-down parsers backtrack a lot with ambigious grammars.  
+Earlier, I spoke about the Bible of the compiler writing:), the Dragon book. The Dragon book, or any compiler design book contains parsing algorithms, classes of languages that can be parsed with these algorithms and efficiency issues. In this section we'll see **LR**, **SLR** , **LALR** and **Earley** parsers. First we again have a look at bottom-up and top-down parsing. **Top-down parsers** begin with grammar rules and try to reach the input string. Left recursive grammars cannot be parsed by recursive descent style top-down parsers. In general, recursive descent top-down parsers backtrack a lot with ambigious grammars.  
 **Bottom-up** parsers begin with the input string and try to reach the starting symbol, building the parse tree from the input. Though procedure looks very similar, indeed bottom-up parsing is much more powerful than top-down parsing. Many modern compilers use bottom-up parsing only.  
 Bottom-up parsing is usually done by shift-reduce parsers and shift reduce parsers avoid backtracking at all. Recursive descent parsers has the problem of reparsing the subtrees, bottom-up parsing avoids this problem via holding the current state by holding a stack and production rules together.
 The convention is:
