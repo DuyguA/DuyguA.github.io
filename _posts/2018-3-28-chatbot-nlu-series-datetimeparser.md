@@ -5,7 +5,7 @@ date: 2018-03-28 09:00:00
 categories: [blog]
 tags: [chatbot nlu, date-time parser] 
 comments: false
-preview_pic: /assets/images/weekday_semantics_correct.png
+preview_pic: /assets/images/day_with_time.png
 ---
 
 # Chatbot NLU Part III: Date-Time Parser
@@ -23,7 +23,8 @@ In sales context, dates can vary from very near future (*today afternoon*) to in
 We will recognize  and parse formal language of date-stime strings with Context Free Grammars. I like to use [Lark](https://github.com/erezsh/lark) for mainly efficiency reasons, availability of several parsing algorithms and full Unicode support. Another very important issue is Lark can handle ambiguity, as we'll see very soon date-time grammars can get quite ambiguous. PyParsing is also great, but Lark is much lighter and faster. We'll visit performance issues later; first we focus on forming the grammars.
 We'll parse German date-time expression for an example. As you will see from the design
 * Non-numeric nonterminals are language dependent i.e. date-time words morgen/morning, gestern/yesterday...
-* Ways of writing date time expressions are different in these two languages. In my observation USA English contains more patterns with timezone info i.e. PST, PDT, GMT etc. My feeling is that, timezones add more ambiguity to USA English data-time grammars.
+* Ways of writing date time expressions are different in these two languages. In my observation USA English contains more patterns with timezone info i.e. PST, PDT, GMT etc. My feeling is that, timezones add more ambiguity to USA English data-time grammars.  
+Before beginning it's useful to have basic information on CFGs and attribute grammars. [The Dragon book](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools) is an excellent reference and  
 Enough speaking, let's see the CFGs on action:
 
 ## Designing the Grammar
@@ -58,7 +59,7 @@ Kommenden Mittwoch 	        coming Wednesday
 n[äa]chster Woche Montag	next week Monday
 ```
 
-OK, customer might also say *this day or that day*. *I'm available Wednesday or Friday afternoon* style patterns frequently occur in customer text. I'll also discard whitespaces while compiling the grammar, time of the day words can be written together and frequently they are written together. Also **Uhr**, **h**, **-**, **/** etc. particles are often written next to numbers with or without spaces. It's a good idea to discard spaces in date-time parsing in general, independent of the language. 
+OK, customer might also say *this day or that day*. *I'm available Wednesday or Friday afternoon* style patterns frequently occur in customer text. I'll also discard whitespaces while compiling the grammar, time of the day words can be written together and frequently they are written together. Also particles such as **Uhr**, **h**, **-**, **/** are often written next to numbers with or without spaces. It's a good idea to discard spaces in date-time parsing in general, independent of the language. 
 
 ```
 Mi or Do.                               Wednesday or Thursday
@@ -109,7 +110,7 @@ then, *Freitag oder Donnerstag nachmittag* ends up with the following parse tree
 </figure>
 
 
-which is not what you want most probably. The string belongs to the language in both cases, however semantics are very different. In the first tree, the two weekdays and the time_of_the_day are at the same level. One can attach time_of_the_day to the both days if you traverse from the **weekday_or_weekday** node. In the latter, time_of_the_day node is sibling to only one weekday node, which happens to be Thursday.  
+which is not what you want most probably. The string belongs to the language in both cases, however semantics are very different. In the first tree, the two weekdays and the *time_of_the_day* are at the same level. One can attach *time_of_the_day* to the both days if you traverse from the *weekday_or_weekday* node. In the latter, *time_of_the_day* node is sibling to only one weekday node, which happens to be Thursday. This parse tree has the meaning *(Friday) or (Thursday afternoon)*.  
 If one string can end up in several parse trees, always ask yourself: 'How should be the precedence/evaluation/semantics?' While designing the grammar, keep the semantics in your head as well. While designing any parser, *you* are the king of the semantics universe. The grammars carry semantics that *you* charge, the generated parse trees are structured the way *you* want.
 OK, let's add the time strings as well. The time string business is a bit tricky, because numbers in general can be many different things, not only part of date strings. What I mean is that:
 
@@ -132,7 +133,7 @@ are %100 time strings, no matter how and where they occur whereas this *11*:
 morgen ab 11        tomorrow beginning from 11
 ```
 
-or even *ab 11* can alone without more qualifiers, mean many things other than a time without the *tomorrow*, which makes this expression a date-time string. For the sake of clarity, I'll skip these sort because one needs to interleave days and numbers. Here's a basic grammar for time strings, I parsed an example expression as well.
+or even *ab 11* can alone without more qualifiers, mean many things other than a time without the *tomorrow*, which makes this expression a date-time string. For the sake of clarity, I'll skip these sort because one needs to interleave days and numbers. Here's a basic grammar for time strings:
 
 ```
 time_expr →  time_or_time | qualified_times | uhr_time
@@ -162,6 +163,7 @@ UNTIL → "bis"
 MAX → "max." | "max"
 CIRCA → "ca." | "ca"
 ```
+I parsed the string `vom 16 bis 17Uhr oder zwischen 18-19Uhr` as an example.
 
 <figure>
   <img class="fullw" src="/assets/images/zwischen.png" alt="zwischen.png">
@@ -181,7 +183,6 @@ I'll put together a Lark grammar, combining dates and times:
 # -*- coding: utf-8 -*-
 
 from lark import Lark
-from lark.tree import pydot__tree_to_png
 
 
 date_grammar = u"""
@@ -193,7 +194,6 @@ date_grammar = u"""
    from_uhr_till_uhr: FROM (uhr_time|might_be_uhr) UNTIL uhr_time
    between_uhr: (BETWEEN)? (uhr_time|might_be_uhr) (TILL|AND) uhr_time
    qualified_uhr:  (TOWARDS|AT|UNTIL|AB|FROM) (CIRCA)? uhr_time
-
 
    precise_date: weekday_or_expr | weekday_t | weekday
     
@@ -237,14 +237,33 @@ date_grammar = u"""
 
 """
 
-parser = Lark(date_grammar, start="precise_date_time")
+parser = Lark(date_grammar, parser="lalr", start="precise_date_time")
 
 text = u"Kommenden Montag, vom 16 bis 17Uhr oder zwischen 18-19Uhr"
-oo = parser.parse(text)
+parse_tree = parser.parse(text)
+print parse_tree
 ```
 
-and parse the string `Kommenden Montag, vom 16 bis 17Uhr oder zwischen 18-19Uhr`.
+and parsed the string `Kommenden Montag, vom 16 bis 17Uhr oder zwischen 18-19Uhr`:
 
 <figure>
   <img class="fullw" src="/assets/images/day_with_time.png" alt="day_with_time.png">
 </figure>
+
+## More of Parsers and Parsing
+
+Earlier, I spoke about the Bible of the compiler writing:), the Dragon book. The Dragon book, or any book contains parsing algorithms, classes of languages that can be parsed with these algorithms and efficiency issues. In this section we'll see **LR**, **SLR** , **LALR** , **CKY** and **Earley** parsers. First we again have a look at bottom-up and top-down parsing.
+**Top-down parsers** begin with grammar rules and try to reach the input string. Left recursive grammars cannot be parsed by recursive descent style top-down parsers. In general, recursive descent top-down parsers backtrack a lot with ambigious grammars. 
+**Bottom-up** parsers begin with the input string and try to reach the starting symbol, building the parse tree from the input. Though procedure looks very similar, indeed bottom-up parsing is much more powerful than top-down parsing. Many modern compilers use bottom-up parsing only. 
+Bottom-up parsing is usually done by shift-reduce parsers and shift reduce parsers avoid backtracking at all. Recursive descent parsers has the problem of reparsing the subtrees, bottom-up parsing avoids this problem via holding the current state by holding a stack and production rules together.
+The convention is:
+
+* an LR(k) grammar is one that can be parsed bottom-up with k tokens of lookahead and an LR(k) language one that is produced by an LR(k) grammar;
+* an LL(k) grammar is one that can be parsed top-down with k tokens of lookahead and, again an LL(k) language is produced from a such corresponding grammar.
+
+**Earley parser** is a dynamic programming algorithm that implements top-down parsing efficiently by avoiding reparsing the subtrees over and over. The dynamic programming table holds a list of states that represent the partial parse trees. By the end of the string, the table compactly encodes all the possible parses of the input string. This way, each subtree is parsed only once and shared by all the relevant parses. The parses forest is hold in a very elegant data structure called *shared forest*. (Generalized LR Parsing)[http://www.springer.com/br/book/9780792392019] is a great resource for learning more about data structures for encoding the parsing information as well as LR parsing in general.
+
+
+
+
+
