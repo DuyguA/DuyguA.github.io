@@ -292,7 +292,7 @@ available, close_date_tok, ?
 ```
 
 What is the semantical difference between 3rd and 4th sentence if you want to classify class of e-mails that contains potential customers? Basically, *nothing*. Sentence 1 rather looks like a complaint, with a past date reference. Raw forms reflect a very compactified form, your model won't suffer from data sparsity and date parsing really compactifies the corpus. Even a vanilla SGD can perform very good with this training set.  
-I prepared a tiny corpus to experiment with SRILM:
+I prepared a tiny corpus to form a LM with [SRILM](http://www.speech.sri.com/projects/srilm):
 ```
 Let's schedule a call tomorrow morning.
 Let's schedule a call tomorrow, after 17.00 pm .
@@ -305,7 +305,7 @@ I'm available for a phone call by next week Monday.
 Are you available for a phone call Tuesday, 21th April?
 We can schedule a phone call on 22th March, Wednesday.
 What is your availability for 24th March, Friday?
-I'm available between tomorrow, between 15.00-17.00.
+I'm available tomorrow, between 15.00-17.00.
 Are you available for a phone call tomorrow?
 Are you available for a phone call next week Friday?
 Are you available for a phone con Friday morning?
@@ -325,4 +325,88 @@ We can have a call at Thursday morning.
 We can have a call at Monday afternoon.
 We can have a call next week.                             
 ```
+I prepared a tiny LM form the corpus above, without date-time tokenization. I couldn't apply Kneser-Ney smoothing to discount LM as corpus is too small and order of ngrams is 3:
+```
+ngram-count -kndiscount -interpolate -order 3 -vocab -text small.txt -lm small.lm
+```
+The resulting ARPA format LM file is 159 lines long. Here are some lines from it:
+```
+\data\
+ngram 1=53
+ngram 2=99
+ngram 3=14
 
+\1-grams:
+-1.926857       10.00   -0.004375084
+-2.227887       12.00   -0.177858
+-2.227887       12.00-14.00     -0.177858
+-2.227887       15.00-17.00     -0.1007647
+-2.227887       17.00   -0.1830591
+-2.227887       17:00   -0.177858
+-2.227887       21th    -0.1830591
+-2.227887       22th    -0.1752338
+-1.926857       23rd    -0.09762894
+-2.227887       24th    -0.1752338
+-2.227887       3       -0.1830591
+-2.227887       5th     -0.1752338
+-2.227887       6th     -0.1752338
+
+-1.750765       monday  -0.07502116
+-1.528917       friday  0.01762764
+-1.926857       thursday        0.003497539
+-1.750765       wednesday       -0.06495982
+-1.625827       tuesday -0.159147
+
+-1.157608       friday afternoon
+-0.9357591      wednesday morning
+```
+This LM doesn't capture semantics of the days of the week. Monday, Tuesday, Friday... admits different probabilities, where most probably it's not what you want. All strings semantically from the same class: days of the week. One more step, Friday afternoon and Wednesday morning also should admit the same probability, as semantically theres no difference at all. Whereas the second LM I prepared after tokenizing is much more compact:
+
+ ```
+ 
+\data\
+ngram 1=9
+ngram 2=13
+ngram 3=8
+
+\1-grams:
+-0.5854607      </s>
+-99     <s>     -1.383722
+-2.187521       ?       -0.1704141
+-2.187521       availability    -0.1704141
+-0.5964561      call    -1.471444
+-0.5854607      close_date_tok  -1.478341
+-0.8073095      phone   -1.271117
+-1.886491       schedule        -0.6253927
+-1.342423       skype   -0.9145698
+
+\2-grams:
+-1.662758       <s> availability
+-0.7596679      <s> call        0.6478174
+-0.3203351      <s> phone       0.03621221
+-1.060698       <s> schedule    0
+-0.6627578      <s> skype       -0.6118199
+-0.30103        ? </s>
+-0.30103        availability close_date_tok
+-0.01099538     call close_date_tok     -0.2903061
+-0.02171925     close_date_tok </s>
+-1.612784       close_date_tok ?
+-0.01772877     phone call      0.2041199
+-0.09691001     schedule phone  0.69897
+-0.04139268     skype call      -0.05115259
+
+\3-grams:
+-0.05115252     <s> call close_date_tok
+-0.01772877     phone call close_date_tok
+-0.009759837    skype call close_date_tok
+-0.01099538     call close_date_tok </s>
+-0.01930515     <s> phone call
+-0.09691001     schedule phone call
+-0.09691001     <s> schedule phone
+-0.009759837    <s> skype call
+
+\end\
+ ```
+ 
+ , only 43 lines. 
+ 
