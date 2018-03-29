@@ -29,8 +29,8 @@ Before beginning it's useful to have basic information on CFGs and attribute gra
 Enough speaking, let's see the CFGs on action:
 
 ## Designing the Grammar
-We'll build a grammar to recognize the **precise dates**: dates look like appointment dates, near future or near past. For instance *yesterday 11 am*, *yesterday afternoon*, *tomorrow at 8.00Uhr*, *23 March Monday, 12:00*... Far away dates i.e. *after 6 moths*, *in 3rd Quarter*, *beginning of the new year* ... can be processed similarly. Let's make a list of strings that we want to recognize.
-Days, either weekdays or relative days yesterday, tomorrow etc. Let's include abbreviations as well. Abbreviations can end with a period or not.
+We'll build a grammar to recognize the **precise dates**: dates look like appointment dates, near future or near past. For instance *yesterday 11 am*, *yesterday afternoon*, *tomorrow at 8.00Uhr*, *23 March Monday, 12:00*... Far away dates i.e. *after 6 moths*, *in 3rd Quarter*, *beginning of the new year* ... can be processed similarly. Let's make a list of strings that we want to recognize.  
+We begin with days, either weekdays or relative days yesterday, tomorrow... Let's include their abbreviations as well. Abbreviations can end with a period or not.
 
 ```
 Mittwoch
@@ -60,7 +60,7 @@ Kommenden Mittwoch 	        coming Wednesday
 n[äa]chster Woche Montag	next week Monday
 ```
 
-OK, customer might also say *this day or that day*. *I'm available Wednesday or Friday afternoon* style patterns frequently occur in customer text. I'll also discard whitespaces while compiling the grammar, time of the day words can be written together and frequently they are written together. Also particles such as **Uhr**, **h**, **-**, **/** are often written next to numbers with or without spaces. It's a good idea to discard spaces in date-time parsing in general, independent of the language. 
+OK, customer might also say *this day or that day*. *I'm available Wednesday or Friday afternoon* style patterns frequently occur in customer text. I'll also discard whitespaces while compiling the grammar, time of the day words can be written together and frequently are written together. Also particles such as **Uhr**, **h**, **-**, **/** are often written next to numbers with or without spaces. It's a good idea to discard spaces in date-time parsing in general, independent of the language. 
 
 ```
 Mi or Do.                               Wednesday or Thursday
