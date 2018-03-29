@@ -274,5 +274,55 @@ Lark library implements both Earley and LALR parsers. Earley algorithm has worst
 
 ## Language Modelling
 
-OK, we parse out date-time strings to look for a ticket in the CRM in a specific time window, or mark an appointment to the sales agent's calendar.
+OK, we parse out date-time strings to look for a ticket in the CRM in a specific time window, or mark an appointment to the sales agent's calendar. There's one more catch here, you can help your statistical algorithm. Character level RNNs surely can recognize the date expressions, however you need an enormous amount of training data to distinguish dates from other numerical expressions. Why not to replace date-times with several tokens, according to their types:
+
+```
+I phoned yesterday afternoon.                                            I phoned past_date_tok.
+Can we schedule a call for 5th April, Fri 17.00-18.00 or 19.00-20.00?    Can we schedule a call for close_date_tok?
+I'm available tomorrow afternoon 17.00.                                  I'm availble close_date_tok.
+Are you available tomorrow afternoon, after 17.00?                       Are you available close_date_tok?
+```
+Go one step further and remove the stopwords to have raw forms:
+
+```
+phoned, past_date_tok
+schedule, call, close_date_tok
+available, close_date_tok
+available, close_date_tok, ?
+```
+
+What is the semantical difference between 3rd and 4th sentence if you want to classify class of e-mails that contains potential customers? Basically, *nothing*. Sentence 1 rather looks like a complaint, with a past date reference. Raw forms reflect a very compactified form, your model won't suffer from data sparsity and date parsing really compactifies the corpus. Even a vanilla SGD can perform very good with this training set.  
+I prepared a tiny corpus to experiment with SRILM:
+```
+Let's schedule a call tomorrow morning.
+Let's schedule a call tomorrow, after 17.00 pm .
+Let's schedule a call on Wednesday morning 10.00 am.
+Let's schedule a call for Thursday morning.
+Let's schedule a call tomorrow afternoon.
+Let's schedule a call on Tuesday afternoon.
+I'm available tomorrow afternoon, after 17.00 o'clock.
+I'm available for a phone call by next week Monday.
+Are you available for a phone call Tuesday, 21th April?
+We can schedule a phone call on 22th March, Wednesday.
+What is your availability for 24th March, Friday?
+I'm available between tomorrow, between 15.00-17.00.
+Are you available for a phone call tomorrow?
+Are you available for a phone call next week Friday?
+Are you available for a phone con Friday morning?
+Are you available for a phone call on 5th March Wed, 12.00 pm CET?
+Are you available for a Skype call on 6th March, 10.00 am CET?
+I'd like to make a phone call next week.
+I'd like to make a phone call next Tuesday, 23rd.
+I'd like to make a phone call in 3 days.
+I'd like to make a phone call oncoming week, Friday.
+I'd like to make a phone call tomorrow afternnon.
+I'd like to make a phone call tomorrow morning.
+We can have a Skype call next week Tuesday, I'm available all day.
+We can have a call at Friday afternoon.
+We can have a call at Wednesday afternoon.
+We can have a call Monday 23rd, 12.00-14.00 pm.
+We can have a call at Thursday morning.
+We can have a call at Monday afternoon.
+We can have a call next week.                             
+```
 
