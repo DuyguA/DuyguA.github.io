@@ -112,7 +112,7 @@ then, *Freitag oder Donnerstag nachmittag* ends up with the following parse tree
 
 
 which is not what you want most probably. The string belongs to the language in both cases, however semantics are very different. In the first tree, the two weekdays and the *time_of_day* are at the same level. One can attach *time_of_day* to the both days if you traverse from the *weekday_or_weekday* node. In the latter, *time_of_day* node is sibling to only one weekday node, which happens to be Thursday. This parse tree has the meaning *(Friday) or (Thursday afternoon)*. 
-If one string can end up in several parse trees, always ask yourself: 'How should be the precedence/evaluation/semantics?' While designing the grammar, keep the semantics in your head as well. While designing any parser, *you* are the king of the semantics universe. The grammars carry semantics that *you* charge, the generated parse trees are structured the way *you* want.  
+If one string can end up in several parse trees, always ask yourself: 'How should be the precedence/evaluation/semantics?' While designing the grammar, keep the semantics in your head as well. While designing any parser, *you* are the king of the semantics universe. The grammars carry semantics that *you* charge, the generated parse trees are structured the way *you* want.   
 OK, let's add the time strings as well. The time string business is a bit tricky, because numbers in general can be many different things, not only part of date strings. What I mean is that:
 
 ```
