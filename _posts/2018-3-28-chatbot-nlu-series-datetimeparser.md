@@ -360,7 +360,7 @@ ngram 3=14
 -1.157608       friday afternoon
 -0.9357591      wednesday morning
 ```
-This LM doesn't capture semantics of the days of the week. Monday, Tuesday, Friday... admits different probabilities, where most probably it's not what you want. All strings semantically from the same class: days of the week. One more step, Friday afternoon and Wednesday morning also should admit the same probability, as semantically theres no difference at all. Whereas the tokenized LM is much more compact:
+This LM doesn't capture semantics of the days of the week. Monday, Tuesday, Friday... admits different probabilities, where most probably it's not what you want. All strings semantically from the same class: days of the week and should admit the same probability. One more step, Friday afternoon and Wednesday morning also should admit the same probability, semantically theres no difference at all. The tokenized LM is much more compact and capture the patterns
 
  ```
  
