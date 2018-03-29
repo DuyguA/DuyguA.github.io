@@ -262,14 +262,16 @@ The convention is:
 * an LL(k) grammar is one that can be parsed top-down with k tokens of lookahead and, again an LL(k) language is produced from a such corresponding grammar.
 * LL(k) ⊂ LR(k) for any k, and LL ⊂ LR.
 
-`Earley parser` is a dynamic programming algorithm that implements top-down parsing efficiently by avoiding reparsing the subtrees over and over. The dynamic programming table holds a list of states that represent the partial parse trees. By the end of the string, the table compactly encodes all the possible parses of the input string. This way, each subtree is parsed only once and shared by all the relevant parses. The parses forest is hold in a very elegant data structure called *shared forest*. [Generalized LR Parsing](http://www.springer.com/br/book/9780792392019) is a great resource for learning more about data structures for encoding the parsing information as well as LR parsing in general.
+`Earley parser` is a dynamic programming algorithm that implements top-down parsing efficiently by avoiding reparsing the subtrees over and over. The dynamic programming table holds a list of states that represent the partial parse trees. By the end of the string, the table compactly encodes all the possible parses of the input string. This way, each subtree is parsed only once and shared by all the relevant parses. The parses forest is hold in a very elegant data structure called *shared forest*. [Generalized LR Parsing](http://www.springer.com/br/book/9780792392019) is a great resource for learning more about data structures for encoding the parsing information as well as LR parsing in general.  
+`LR parsers` are shift-reduce parsers, so a type of bottom-up parsers. LR(k) parsers have a "configuration" correspond to each state in order to keep track of determine to shift or to reduce. A "configuration" is a set with the information of: 1. Where is the parser so far with the production rule 2. The lookahead, what tokens to expect after the production rule is completed.  
+`SLR and LALR parsers` are common variants of `LR parsers` *SLR* is implemented with small parse tables and a relatively simple parser generator algorithm, comparing to LALR. Both SLR and LALR implementtions has no backtracking. LALR parsers are used more commonly in compiler writing than the other types, though it's less powerful than LR(1), one rarely needs all power of LR(1). *yacc* and many other compiler compilers has default parser LALR. LR(1) parsers are really big, I mean exponentially bigger than LALR(1). Hence:
 
+* LR(0) ⊂ SLR(1) ⊂ LALR(1) ⊂ LR(1)
+* SLR(1) is fairly a weak parsing method method comparing to LALR(1). LALR(1) parsers are more specific while resolving the conflicts that arise during parsing, basically when to shift or reduce.  
+Our tiny grammar is LALR(1). It has ambiguities that you can avoid by a 1-token lookahead, but it's *a bit too ambigious* to be LR(0).  
+Lark library implements both Earley and LALR parsers. Earley algorithm has worst case time complexity O(n^3), while LALR(1) has linear complexity. One of the things that I like about Lark is that, it implements a very common algorithm LALR, but also a very powerful one, Earley. Our grammar is not bad:), not very far away from a full recognizer; but a real world date-time grammar is much more ambigious(believe my word here, if I post here parsing table of the grammar that I'm using for e-mail processing you get into shock:)). When one has both Earley and LALR, one can parse *almost everything*. 
 
-LR(0) ⊂ SLR(1) ⊂ LALR(1) ⊂ LR(1)
+## Language Modelling
 
-Our tiny grammar is LALR(1). It has ambiguities that you can avoid by 1-token lookahead and 
-
-Lark library implements both Earley and LALR parsers. Earley algorithm has worst case time complexity O(n^3), 
-
-
+OK, we parse out date-time strings to look for a ticket in the CRM in a specific time window, or mark an appointment to the sales agent's calendar.
 
