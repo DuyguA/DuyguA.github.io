@@ -408,5 +408,7 @@ ngram 3=8
 \end\
  ```
  
- , only 43 lines. 
+ with only 43 lines. This compacted LM will answer even to the simplest statistical algorithm I remarked, now you see with your own eyes.
+ 
+ The semantics has never been a simple issue, it's complicated and it'll stay complicated. In this post, we began with parsing algorithms and travelled until to the statistical side of the semantics. I hope you enjoyed the journey. Stay tuned and have a happy Easter!  
  
