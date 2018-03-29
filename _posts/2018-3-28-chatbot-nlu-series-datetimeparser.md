@@ -24,7 +24,8 @@ We will recognize  and parse formal language of date-stime strings with Context 
 We'll parse German date-time expression for an example. As you will see from the design
 * Non-numeric nonterminals are language dependent i.e. date-time words morgen/morning, gestern/yesterday...
 * Ways of writing date time expressions are different in these two languages. In my observation USA English contains more patterns with timezone info i.e. PST, PDT, GMT etc. My feeling is that, timezones add more ambiguity to USA English date-time grammars.  
-Before beginning it's useful to have basic information on CFGs and attribute grammars. [The Dragon book](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools) is an excellent reference and should be on the shelf of every compiler designer.
+
+Before beginning it's useful to have basic information on CFGs and attribute grammars. [The Dragon book](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools) is an excellent reference and should be on the shelf of every compiler designer.  
 Enough speaking, let's see the CFGs on action:
 
 ## Designing the Grammar
