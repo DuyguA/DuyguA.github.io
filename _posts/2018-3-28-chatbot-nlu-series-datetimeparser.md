@@ -292,7 +292,7 @@ available, close_date_tok
 available, close_date_tok, ?
 ```
 
-What is the semantical difference between 3rd and 4th sentence if you want to classify class of e-mails that contains potential customers? Basically, *nothing*. Sentence 1 rather looks like a complaint, with a past date reference. Raw forms reflect a very compactified form, your model won't suffer from data sparsity and date parsing really compactifies the corpus. Even a vanilla SGD can perform very good with this training set.  
+What is the semantical difference between 3rd and 4th sentence if you want to classify class of e-mails that contains potential customers? Basically, *nothing*. Sentence 1 rather looks like a complaint, with a past date reference. Raw forms reflect a very compactified form, your model won't suffer from data sparsity; date parsing really compactifies the corpus. Even a vanilla SGD can perform very good with this training set.  
 I prepared a tiny corpus to form a LM with [SRILM](http://www.speech.sri.com/projects/srilm):
 ```
 Let's schedule a call tomorrow morning.
@@ -361,7 +361,7 @@ ngram 3=14
 -1.157608       friday afternoon
 -0.9357591      wednesday morning
 ```
-This LM doesn't capture semantics of the days of the week. Monday, Tuesday, Friday... admits different probabilities, where most probably it's not what you want. All strings semantically from the same class: days of the week and should admit the same probability. One more step, Friday afternoon and Wednesday morning also should admit the same probability, semantically theres no difference at all. The tokenized LM is much more compact and capture the patterns
+This LM doesn't capture semantics of the days of the week. Monday, Tuesday, Friday... admits different probabilities, where most probably it's not what you want. All strings semantically from the same class: days of the week and should admit the same probability. Also too much probability mass went to numbers. One more step, Friday afternoon and Wednesday morning also should admit the same probability, semantically theres no difference at all. The tokenized LM is much more compact and capture the patterns:
 
  ```
  
@@ -409,7 +409,7 @@ ngram 3=8
 \end\
  ```
  
- with only 43 lines. This compacted LM will answer even to the simplest statistical algorithm I remarked, now you see with your own eyes.
+ with only 43 lines. This compacted LM will answer even to the simplest statistical algorithm as I remarked previously,  now you see with your own eyes.
  
  The semantics has never been a simple issue, it's complicated and it'll stay complicated. In this post, we began with parsing algorithms and travelled until to the statistical side of the semantics. I hope you enjoyed the journey. Stay tuned and have a happy Easter!  
  
