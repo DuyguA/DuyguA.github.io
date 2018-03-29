@@ -23,8 +23,8 @@ In sales context, dates can vary from very near future (*today afternoon*) to in
 We will recognize  and parse formal language of date-stime strings with Context Free Grammars. I like to use [Lark](https://github.com/erezsh/lark) for mainly efficiency reasons, availability of several parsing algorithms and full Unicode support. Another very important issue is Lark can handle ambiguity, as we'll see very soon date-time grammars can get quite ambiguous. PyParsing is also great, but Lark is much lighter and faster. We'll visit performance issues later; first we focus on forming the grammars.
 We'll parse German date-time expression for an example. As you will see from the design
 * Non-numeric nonterminals are language dependent i.e. date-time words morgen/morning, gestern/yesterday...
-* Ways of writing date time expressions are different in these two languages. In my observation USA English contains more patterns with timezone info i.e. PST, PDT, GMT etc. My feeling is that, timezones add more ambiguity to USA English data-time grammars.  
-Before beginning it's useful to have basic information on CFGs and attribute grammars. [The Dragon book](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools) is an excellent reference and  
+* Ways of writing date time expressions are different in these two languages. In my observation USA English contains more patterns with timezone info i.e. PST, PDT, GMT etc. My feeling is that, timezones add more ambiguity to USA English date-time grammars.  
+Before beginning it's useful to have basic information on CFGs and attribute grammars. [The Dragon book](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools) is an excellent reference and should be on the shelf of every compiler designer.
 Enough speaking, let's see the CFGs on action:
 
 ## Designing the Grammar
