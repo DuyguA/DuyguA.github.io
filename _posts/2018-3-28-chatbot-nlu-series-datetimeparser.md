@@ -268,6 +268,7 @@ The convention is:
 
 * LR(0) ⊂ SLR(1) ⊂ LALR(1) ⊂ LR(1)
 * SLR(1) is fairly a weak parsing method method comparing to LALR(1). LALR(1) parsers are more specific while resolving the conflicts that arise during parsing, basically when to shift or reduce.  
+
 Our tiny grammar is LALR(1). It has ambiguities that you can avoid by a 1-token lookahead, but it's *a bit too ambigious* to be LR(0).  
 Lark library implements both Earley and LALR parsers. Earley algorithm has worst case time complexity O(n^3), while LALR(1) has linear complexity. One of the things that I like about Lark is that, it implements a very common algorithm LALR, but also a very powerful one, Earley. Our grammar is not bad:), not very far away from a full recognizer; but a real world date-time grammar is much more ambigious(believe my word here, if I post here parsing table of the grammar that I'm using for e-mail processing you get into shock:)). When one has both Earley and LALR, one can parse *almost everything*. 
 
