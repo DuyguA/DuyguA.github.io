@@ -29,7 +29,7 @@ Before beginning it's useful to have basic information on CFGs and attribute gra
 Enough speaking, let's see the CFGs on action:
 
 ## Designing the Grammar
-We'll build a grammar to recognize the **precise dates**: dates look like appointment dates, near future or near past. For instance *yesterday 11 am*, *yesterday afternoon*, *tomorrow at 8.00Uhr*, *23 March Monday, 12:00*... Far away dates i.e. *after 6 moths*, *in 3rd Quarter*, *beginning of the new year* ... can be processed similarly. Let's make a list of strings that we want to recognize.  
+We'll build a grammar to recognize the **precise dates**: dates look like appointment dates, near future or near past. For instance *yesterday 11 am*, *yesterday afternoon*, *tomorrow at 8.00Uhr*, *23 March Monday, 12:00*... Far away dates i.e. *after 6 moths*, *in 3rd Quarter*, *beginning of the new year* ... can be processed similarly. Let's make a list of strings that we want to recognize.  
 We begin with days, either weekdays or relative days yesterday, tomorrow... Let's include their abbreviations as well. Abbreviations can end with a period or not.
 
 ```
@@ -111,8 +111,8 @@ then, *Freitag oder Donnerstag nachmittag* ends up with the following parse tree
 </figure>
 
 
-which is not what you want most probably. The string belongs to the language in both cases, however semantics are very different. In the first tree, the two weekdays and the *time_of_the_day* are at the same level. One can attach *time_of_the_day* to the both days if you traverse from the *weekday_or_weekday* node. In the latter, *time_of_the_day* node is sibling to only one weekday node, which happens to be Thursday. This parse tree has the meaning *(Friday) or (Thursday afternoon)*.  
-If one string can end up in several parse trees, always ask yourself: 'How should be the precedence/evaluation/semantics?' While designing the grammar, keep the semantics in your head as well. While designing any parser, *you* are the king of the semantics universe. The grammars carry semantics that *you* charge, the generated parse trees are structured the way *you* want.
+which is not what you want most probably. The string belongs to the language in both cases, however semantics are very different. In the first tree, the two weekdays and the *time_of_the_day* are at the same level. One can attach *time_of_the_day* to the both days if you traverse from the *weekday_or_weekday* node. In the latter, *time_of_day* node is sibling to only one weekday node, which happens to be Thursday. This parse tree has the meaning *(Friday) or (Thursday afternoon)*.  
+If one string can end up in several parse trees, always ask yourself: 'How should be the precedence/evaluation/semantics?' While designing the grammar, keep the semantics in your head as well. While designing any parser, *you* are the king of the semantics universe. The grammars carry semantics that *you* charge, the generated parse trees are structured the way *you* want.  
 OK, let's add the time strings as well. The time string business is a bit tricky, because numbers in general can be many different things, not only part of date strings. What I mean is that:
 
 ```
