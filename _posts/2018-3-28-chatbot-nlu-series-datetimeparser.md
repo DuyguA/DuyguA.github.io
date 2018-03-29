@@ -52,7 +52,7 @@ morgen nachmittag       tomorrow afternoon
 Freitag ganzer Tag	Friday all day
 ```
 
-or we can qualify the day expression. Don't forget to relax umlauts by non-umlaut equivalents. 
+We can qualify the day expression with 'next' as well. Don't forget to relax umlauts by non-umlaut equivalents. 
 
 ```
 Kommenden Mittwoch 	        coming Wednesday
