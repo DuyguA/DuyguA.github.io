@@ -53,7 +53,7 @@ Most probably your chatbot would like to respond to customers in their own tone 
 U: Sende(senden 2ndper,sing,imp) mir die Unterlagen.
 B: Kannst(können 2ndper,sing,aux) du(2ndper,sing) mir deine(2ndper,sing) Kundennummer mitteilen?
 
-U: Können Sie mir hilfen?
+U: Können Sie mir helfen?
 B: Können(können inf,aux) Sie(2ndper,plu) mir Ihrer(2ndper,plu) Kundennummer mitteilen?
 ```
 
