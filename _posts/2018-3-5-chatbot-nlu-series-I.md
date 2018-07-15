@@ -112,7 +112,7 @@ Surrounding words i.e. the context are exactly the same, then no wonder word vec
 
 I usually store synonyms as dictionaries, so the replacement is straightforward, just one dictionary lookup. One can also map multiword phrases to one word or again multiword phrases. In that case, some keys are substrings of the other keys. In this case, its better to hold your dictionary as a **Trie**. More onto this data structure will come later. 
 
-## Stem 
+## Stemming
 Stemming is the process of finding the shortest substring of a word that keep the **concept** of the word. Important thing is to know that the stem does nt belong to the language's lexicon (i.e. a valid word) and many words can map to the same stem. 
 
 Lemmatizing is better for some NLP tasks, but stemmer works fine for many semantic tasks. Many colleagues I know use Porter2 (Snowball, improved Porter) stemmer, however don't underestimate the Lancaster stemmer definitely. Lancaster stemmer is much more aggressive, sometimes result with short words is just not understandable at all or wrong. However, if you have a huge corpus, Lancaster algorithm can lead to magic results by trimming "too much". In this post we discuss small to mid size corpora, so I'll use Snowball algorithm. We have a tiny help from nltk:) Here's how you use the stemmer:
