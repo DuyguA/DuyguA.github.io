@@ -50,6 +50,9 @@ Another type of stopwords are rather stopphrases that occur in your text. For in
 ```
 your e-mail
 your message
+your product
+your offer
+your proposal
 many thanks for
 thanks for
 ```
@@ -110,4 +113,37 @@ Surrounding words i.e. the context are exactly the same, then no wonder word vec
 I usually store synonyms as dictionaries, so the replacement is straightforward, just one dictionary lookup. One can also map multiword phrases to one word or again multiword phrases. In that case, some keys are substrings of the other keys. In this case, its better to hold your dictionary as a **Trie**. More onto this data structure will come later. 
 
 ## Stem 
-Stemming is the process of finding the shortest substring of a word that keep the **concept** of the word. Important thing is to know that the stem does nt belong to the language's lexicon (i.e. a valid word) and 
+Stemming is the process of finding the shortest substring of a word that keep the **concept** of the word. Important thing is to know that the stem does nt belong to the language's lexicon (i.e. a valid word) and many words can map to the same stem. 
+
+Lemmatizing is better for some NLP tasks, but stemmer works fine for many semantic tasks. Many colleagues I know use Porter2 (Snowball, improved Porter) stemmer, however don't underestimate the Lancaster stemmer definitely. Lancaster stemmer is much more aggressive, sometimes result with short words is just not understandable at all or wrong. However, if you have a huge corpus, Lancaster algorithm can lead to magic results by trimming "too much". In this post we discuss small to mid size corpora, so I'll use Snowball algorithm. We have a tiny help from nltk:) Here's how you use the stemmer:
+
+```
+from nltk.stem.snowball import SnowballStemmer
+stemmer = SnowballStemmer("english")
+
+def email_preprocessor(mail):
+    entities = {}
+    mail = lexical_processor(mail)     
+    doc = nlp(mail)                    
+    entities['emails'] = extract_emails(doc)
+    entities['persons'] = extract_person_names(doc)
+    word_list = remove_stopwords(doc)        
+    stemmed_words = [stemmer.stem(word) for word in word_list]
+    return stemmed_words
+```
+
+Let's make couple of examples to understand why we did the preprocessing:
+
+```
+I don't think your product is any good. -> not good
+Currently we have no interest in your offer. -> currently no interest
+We're not interested, sorry. -> not interest
+Can we schedule an appointment tomorrow afternoon, before 14.00? -> schedule appointment date_tok
+I'd like to make an appointment on Friday 15.00. -> schedule appointment date_tok
+Please direct all yor messages to my colleague Melissa Herat, melissa@dmm.de -> contact colleague person_tok email_tok
+You can contact my collegaue Mr. Herrmann under herrmann@duygu.de -> contact colleague person_tok email_tok
+```
+
+Point is to **regularize** the patterns and make semantically similar sentences look alike as much as possible. This way, even if you don't have any pretrained word vectors, even vanilla SGD can evaluate the patterns in the data and result won't be bad. 
+
+After the preprocessing, you have a brand new and polished dataset. What to do next? Jump to the text classificaton post from here and enjoy your time with some fine statistical algorithms; or dive into the world of [SpaCy](https://spacy.io/). In either case stay tuned for more and don't forget to have a good time mining your text.
