@@ -5,6 +5,7 @@ date: 2018-03-05 09:00:00
 categories: [blog]
 tags: [chatbot nlu, chatbot, text preprocessing]
 comments: false
+preview_pic: /assets/images/bot_pre.jpg
 ---
 
 # Chatbot NLU Part I: Preprocess Your Text
