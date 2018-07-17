@@ -146,6 +146,6 @@ Please direct all yor messages to my colleague Melissa Herat, melissa@dmm.de -> 
 You can contact my collegaue Mr. Herrmann under herrmann@duygu.de -> contact colleague person_tok email_tok
 ```
 
-Point is to **regularize** the patterns and make semantically similar sentences look alike as much as possible. This way, even if you don't have any pretrained word vectors, even vanilla SGD can evaluate the patterns in the data and result won't be bad. 
+Point is to **regularize** the patterns and make semantically similar sentences look alike as much as possible. This way, even if you don't have any pretrained word vectors, even vanilla SGD can evaluate the patterns in the data and result won't be bad. Also notice the reduce in the vocabulary size.
 
 After the preprocessing, you have a brand new and polished dataset. What to do next? Jump to the text classificaton post from here and enjoy your time with some fine statistical algorithms; or dive into the world of [SpaCy](https://spacy.io/). In either case stay tuned for more and don't forget to have a good time mining your text.
