@@ -93,6 +93,7 @@ def email_preprocessor(mail):
     entities['persons'] = extract_person_names(doc)
     word_list = remove_stopwords(doc)        #word_list is list(unicode) type
 ```
+There is only one issue to be careful though. Many packages including NLTK includes negativity particles "not", "nicht", "kein" into the stopwords. Especially when you're doing sentiment analysis, it can lead to a disaster. Don't forget to view the list of stopwords you're using, make necessary additions in your code.
 
 ## Replace Synonyms
 No matter what people say, if you have a close domain replacing synoynms is always a good idea. Especially in small/mid size corpus, it creates miracles. In order word vectors to achieve their best in your domain:
